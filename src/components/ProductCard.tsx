@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 
 import { Product } from "@/types"
 
-const SingleProduct = (props: { product: Product }) => {
+const ProductCard = (props: { product: Product }) => {
   const { product } = props // destructure
 
   return (
@@ -33,4 +33,4 @@ const SingleProduct = (props: { product: Product }) => {
   )
 }
 
-export default SingleProduct
+export default ProductCard

@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { AppDispatch, RootState } from "@/toolkit/store"
 
-import SingleProduct from "./SingleProduct"
 import { fetchProducts } from "@/toolkit/slices/productSlice"
+import ProductCard from "./ProductCard"
 
 const Products = () => {
   // fetch data and access store for all products
@@ -66,7 +66,7 @@ const Products = () => {
       <section className="products">
         {products &&
           products.length > 0 &&
-          products.map((product) => <SingleProduct key={product.productId} product={product} />)}
+          products.map((product) => <ProductCard key={product.productId} product={product} />)}
       </section>
 
       <div className="pagination">

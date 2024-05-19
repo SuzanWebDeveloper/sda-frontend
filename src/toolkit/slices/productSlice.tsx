@@ -46,10 +46,9 @@ const productSlice = createSlice({
   name: "products",
   initialState: initialState,
   reducers: {},
-  //products
+  //all products
   extraReducers(builder) {
     builder.addCase(fetchProducts.fulfilled, (state, action) => {
-    //  console.log(action.payload.data.totalPages)
       state.products = action.payload.data.items.$values
       state.totalPages = action.payload.data.totalPages
       state.isLoading = false
@@ -58,7 +57,6 @@ const productSlice = createSlice({
     //product by id
     //update the state product
     builder.addCase(fetchProductBySlug.fulfilled, (state, action) => {
-      // console.log("test: " + action.payload.data) doesn't show
       state.product = action.payload.data
       state.isLoading = false
     })
