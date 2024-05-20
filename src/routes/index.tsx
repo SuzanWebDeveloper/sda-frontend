@@ -18,6 +18,8 @@ import Navbar from "@/components/layout/Navbar"
 import Footer from "@/components/layout/Footer"
 import { ProductDetails } from "@/pages/ProductDetails"
 import { Register } from "@/pages/Register"
+import ProtectedRoute from "./ProtectedRoute"
+import AdminRoute from "./AdminRoute"
 
 const Index = () => {
   return (
@@ -31,15 +33,19 @@ const Index = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
 
-          <Route path="/dashboard/user" element={<UserDashboard />} />
-          <Route path="/dashboard/user/profile" element={<UserProfile />} />
-          <Route path="/dashboard/user/orders" element={<UserOrders />} />
+          <Route path="/dashboard" element={<ProtectedRoute />}>
+            <Route path="user" element={<UserDashboard />} />
+            <Route path="user/profile" element={<UserProfile />} />
+            <Route path="user/orders" element={<UserOrders />} />
+          </Route>
 
-          <Route path="/dashboard/admin" element={<AdminDashboard />} />
-          <Route path="/dashboard/admin/categories" element={<Categories />} />
-          <Route path="/dashboard/admin/products" element={<Products />} />
-          <Route path="/dashboard/admin/users" element={<Users />} />
-          <Route path="/dashboard/admin/orders" element={<Orders />} />
+          <Route path="/dashboard" element={<AdminRoute />}>
+            <Route path="admin" element={<AdminDashboard />} />
+            <Route path="admin/categories" element={<Categories />} />
+            <Route path="admin/products" element={<Products />} />
+            <Route path="admin/users" element={<Users />} />
+            <Route path="admin/orders" element={<Orders />} />
+          </Route>
 
           <Route path="*" element={<Error />} />
         </Routes>

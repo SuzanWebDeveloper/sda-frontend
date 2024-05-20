@@ -8,8 +8,6 @@ const data =
     ? JSON.parse(String(localStorage.getItem("loginData")))
     : []
 
-console.log(data.token)
-
 const initialState: UserState = {
   error: null,
   isLoading: false,
@@ -19,13 +17,10 @@ const initialState: UserState = {
 }
 
 export const registerUser = createAsyncThunk("users/registerUser", async (newUser: User) => {
-  console.log(newUser)
   const response = await api.post("/users", newUser)
-  // console.log(response.data)
   return response.data
 })
 export const loginUser = createAsyncThunk("users/loginUser", async (userData: LoginFormData) => {
-  console.log(userData)
   const response = await api.post("/users/login", userData)
   return response.data
 })
@@ -52,10 +47,8 @@ const userSlice = createSlice({
 
   extraReducers(builder) {
     builder.addCase(loginUser.fulfilled, (state, action) => {
-      console.log(action.payload.data.token)
       state.isLoggedIn = true
       state.token = action.payload.data.token
-      console.log(state.token)
       state.userData = action.payload.data.user
       state.isLoading = false
       localStorage.setItem(

@@ -4,11 +4,10 @@ import { SubmitHandler, useForm } from "react-hook-form"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 
-import { loginUser} from "@/toolkit/slices/userSlice"
+import { loginUser } from "@/toolkit/slices/userSlice"
 import { LoginFormData } from "@/types"
 
 export const Login = () => {
-  
   const navigate = useNavigate()
   const dispatch: AppDispatch = useDispatch()
   const {
@@ -20,8 +19,9 @@ export const Login = () => {
   const onSubmit: SubmitHandler<LoginFormData> = async (data) => {
     try {
       const response = await dispatch(loginUser(data))
-      toast.success(response.payload.message)
-      // navigate("/login")
+      const role = response.payload.data.user.role
+      // toast.success(response.payload.message)
+       navigate(role == "admin" ? "/dashboard/admin" : "/dashboard/user")
     } catch (error: any) {
       toast.error(error.message || "Login failed")
     }
