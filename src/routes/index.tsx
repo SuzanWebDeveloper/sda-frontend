@@ -2,13 +2,17 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 
 import {
   AdminDashboard,
+  Categories,
   Contact,
   Error,
   Home,
   Login,
+  Orders,
+  Products,
   UserDashboard,
   UserOrders,
-  UserProfile
+  UserProfile,
+  Users
 } from "@/pages"
 import Navbar from "@/components/layout/Navbar"
 import Footer from "@/components/layout/Footer"
@@ -32,15 +36,15 @@ const Index = () => {
           <Route path="/dashboard/user/orders" element={<UserOrders />} />
 
           <Route path="/dashboard/admin" element={<AdminDashboard />} />
-          <Route path="/dashboard/categories" element={<AdminDashboard />} />
-          <Route path="/dashboard/products" element={<AdminDashboard />} />
-          <Route path="/dashboard/users" element={<AdminDashboard />} />
-          <Route path="/dashboard/orders" element={<AdminDashboard />} />
+          <Route path="/dashboard/admin/categories" element={<Categories />} />
+          <Route path="/dashboard/admin/products" element={<Products />} />
+          <Route path="/dashboard/admin/users" element={<Users />} />
+          <Route path="/dashboard/admin/orders" element={<Orders />} />
 
           <Route path="*" element={<Error />} />
         </Routes>
       </main>
-      <Footer></Footer>
+      <Footer />
     </BrowserRouter>
   )
 }
