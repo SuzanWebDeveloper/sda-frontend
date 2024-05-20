@@ -6,7 +6,6 @@ import { fetchProducts } from "@/toolkit/slices/productSlice"
 import ProductCard from "./ProductCard"
 import useProductsState from "@/hook/useProductsState"
 
-
 const Products = () => {
   // fetch data and access store for all products
   const { products, isLoading, error, totalPages } = useProductsState()
@@ -54,8 +53,8 @@ const Products = () => {
           />
         </div>
         <div className="flex-center">
-          <p>Sort By</p>
-          <select name="" id="" onChange={handleSortChange}>
+          <label htmlFor="sort">Sort By</label>
+          <select name="sort" id="sort" onChange={handleSortChange}>
             <option value="Name">Name</option>
             <option value="Price">Price</option>
           </select>
