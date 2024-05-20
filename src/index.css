@@ -70,7 +70,7 @@ h2 {
   border-radius: var(--border-radius);
   transition: var(--transition);
   /* padding: var(--padding); */
-  padding: 0.5rem;
+  padding: 1rem;
 }
 
 .card:hover {
@@ -89,7 +89,7 @@ textarea {
 nav {
   background-color: var(--primary-color);
   padding: 1rem 0;
-  height: 10vh;
+  min-height: 10vh;
 }
 
 .nav__lists {
@@ -110,6 +110,11 @@ nav {
 /* nav ends here */
 
 /* main-container starts here */
+.sidebar-container {
+  flex: 1;
+  padding: 0.5rem;
+}
+
 main {
   min-height: 85dvh;
   /* padding-left: 3rem;

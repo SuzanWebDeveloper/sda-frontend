@@ -8,7 +8,7 @@ const data =
     ? JSON.parse(String(localStorage.getItem("loginData")))
     : []
 
- console.log(data.token)
+console.log(data.token)
 
 const initialState: UserState = {
   error: null,
@@ -30,18 +30,32 @@ export const loginUser = createAsyncThunk("users/loginUser", async (userData: Lo
   return response.data
 })
 
-//--------------------
 const userSlice = createSlice({
   name: "users",
   initialState: initialState,
-  reducers: {},
+  reducers: {
+    logoutUser: (state) => {
+      state.isLoggedIn = false
+      state.token = null
+      state.userData = null
+      state.isLoading = false
+      localStorage.setItem(
+        "loginData",
+        JSON.stringify({
+          isLoggedIn: state.isLoggedIn,
+          token: state.token,
+          userData: state.userData
+        })
+      )
+    }
+  },
 
   extraReducers(builder) {
     builder.addCase(loginUser.fulfilled, (state, action) => {
       console.log(action.payload.data.token)
       state.isLoggedIn = true
       state.token = action.payload.data.token
-        console.log(state.token)
+      console.log(state.token)
       state.userData = action.payload.data.user
       state.isLoading = false
       localStorage.setItem(
@@ -64,13 +78,13 @@ const userSlice = createSlice({
 
     builder.addMatcher(
       (action) => action.type.endsWith("/rejected"),
-      (state, action) => {
+      (state) => {
         state.error = "An error occurred" //default string
         state.isLoading = false
       }
     )
   }
 })
-//--------------------
 
+export const { logoutUser } = userSlice.actions
 export default userSlice.reducer

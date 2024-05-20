@@ -3,4 +3,8 @@ export { Contact } from "./Contact"
 export { Error } from "./Error"
 export { Register } from "./Register"
 export { Login } from "./Login"
+export { UserDashboard } from "./UserDashboard"
+export { AdminDashboard } from "./AdminDashboard"
+export { UserProfile } from "./UserProfile"
+export { UserOrders } from "./UserOrders"
 
