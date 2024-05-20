@@ -4,11 +4,11 @@ import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 
 import { fetchProductBySlug } from "@/toolkit/slices/productSlice"
+import useProductsState from "@/hook/useProductsState"
 
 export const ProductDetails = () => {
   const { slug } = useParams<{ slug: string }>()
-
-  const { product, isLoading, error } = useSelector((state: RootState) => state.productR)
+  const { product, isLoading, error } = useProductsState()
 
   const dispatch: AppDispatch = useDispatch()
 

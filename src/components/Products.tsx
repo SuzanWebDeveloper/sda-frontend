@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { AppDispatch, RootState } from "@/toolkit/store"
+import { useDispatch } from "react-redux"
+import { AppDispatch } from "@/toolkit/store"
 
 import { fetchProducts } from "@/toolkit/slices/productSlice"
 import ProductCard from "./ProductCard"
+import useProductsState from "@/hook/useProductsState"
+
 
 const Products = () => {
   // fetch data and access store for all products
-  const { products, isLoading, error, totalPages } = useSelector(
-    (state: RootState) => state.productR
-  )
+  const { products, isLoading, error, totalPages } = useProductsState()
 
   const dispatch: AppDispatch = useDispatch()
 

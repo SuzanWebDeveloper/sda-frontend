@@ -1,12 +1,10 @@
-import React from "react"
-import { useSelector } from "react-redux"
 import { Outlet } from "react-router-dom"
-import { RootState } from "@/toolkit/store"
 
 import { Login } from "@/pages"
+import useUsersState from "@/hook/useUsersState"
 
 const ProtectedRoute = () => {
-  const { isLoggedIn } = useSelector((state: RootState) => state.userR)
+  const { isLoggedIn } = useUsersState()
   return isLoggedIn ? <Outlet /> : <Login />
 }
 
