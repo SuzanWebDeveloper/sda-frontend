@@ -200,6 +200,38 @@ main {
 }
 /* products ends here */
 
+/* table starts here */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  text-align: left;
+}
+
+th,
+td {
+  padding: 12px 15px;
+}
+
+th {
+  background-color: rgb(247, 160, 174);
+  color: white;
+  text-align: left;
+}
+tr {
+  border-bottom: 1px solid #ddd;
+}
+tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+/* tr:last-of-type {
+  background-color: green;
+} */
+.delete-btn {
+  background-color: rgb(238, 62, 62);
+}
+/* table ends here */
+
 /* footer starts here */
 .footer {
   padding: 1rem;

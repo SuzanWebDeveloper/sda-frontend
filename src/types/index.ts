@@ -7,17 +7,25 @@ export type Category = {
   createdAt: string
 }
 
+export type CategoryState = {
+  categories: Category[]
+  //totalPages: number
+  category: Category | null
+  error: null | string
+  isLoading: boolean
+}
+
 export type Product = {
   productId: string
   name: string
   slug: string
   image: string
   description: string
-  color: string
+  //color: string
   price: number
   soldQuantity: number
   stock: number
-  categories: Category[]
+  // categories: Category[]
   createdAt: string
 }
 

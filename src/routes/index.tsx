@@ -2,7 +2,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 
 import {
   AdminDashboard,
-  Categories,
   Contact,
   Error,
   Home,
@@ -20,6 +19,8 @@ import { ProductDetails } from "@/pages/ProductDetails"
 import { Register } from "@/pages/Register"
 import ProtectedRoute from "./ProtectedRoute"
 import AdminRoute from "./AdminRoute"
+import AdminCategories from "@/components/AdminCategories"
+
 
 const Index = () => {
   return (
@@ -41,7 +42,7 @@ const Index = () => {
 
           <Route path="/dashboard" element={<AdminRoute />}>
             <Route path="admin" element={<AdminDashboard />} />
-            <Route path="admin/categories" element={<Categories />} />
+            <Route path="admin/categories" element={<AdminCategories />} />
             <Route path="admin/products" element={<Products />} />
             <Route path="admin/users" element={<Users />} />
             <Route path="admin/orders" element={<Orders />} />
