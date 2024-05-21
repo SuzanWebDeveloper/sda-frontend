@@ -6,15 +6,7 @@ import { toast } from "react-toastify"
 
 import { registerUser } from "@/toolkit/slices/userSlice"
 import { AppDispatch } from "@/toolkit/store"
-
-type FormData = {
-  name: string
-  email: string
-  password: string
-  phone: number
-  address: string
-  role: string
-}
+import { RegisterFormData } from "@/types"
 
 export const Register = () => {
   const navigate = useNavigate()
@@ -23,9 +15,9 @@ export const Register = () => {
     register,
     handleSubmit,
     formState: { errors }
-  } = useForm<FormData>()
+  } = useForm<RegisterFormData>()
 
-  const onSubmit: SubmitHandler<FormData> = async (data) => {
+  const onSubmit: SubmitHandler<RegisterFormData> = async (data) => {
     try {
       const response = await dispatch(registerUser(data))
       toast.success(response.payload.message)

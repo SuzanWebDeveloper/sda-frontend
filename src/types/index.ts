@@ -30,11 +30,12 @@ export type ProductState = {
 }
 
 export type User = {
+  userId?: string
   name: string
   email: string
   password: string
   phone: number
-  Address?: string
+  address?: string
   role?: string
 }
 
@@ -49,4 +50,24 @@ export type UserState = {
 export type LoginFormData = {
   email: string
   password: string
+}
+
+export type LoginData = {
+  token: string
+  userData: null | User
+  isLoggedIn: boolean
+}
+
+export type RegisterFormData = {
+  name: string
+  email: string
+  password: string
+  phone: number
+  address: string
+}
+
+export type UpdateProfileFormData = {
+  name: string
+  phone: number
+  address: string
 }

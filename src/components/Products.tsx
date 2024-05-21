@@ -68,19 +68,21 @@ const Products = () => {
           products.map((product) => <ProductCard key={product.productId} product={product} />)}
       </section>
 
-      <div className="pagination">
-        <button onClick={handlePreviousPage} disabled={pageNumber === 1}>
-          Previous
-        </button>
-        {Array.from({ length: totalPages }, (_, index) => (
-          <button key={index} onClick={() => setPageNumber(index + 1)}>
-            {index + 1}
+      {products && products.length > 0 && (
+        <div className="pagination">
+          <button onClick={handlePreviousPage} disabled={pageNumber === 1}>
+            Previous
           </button>
-        ))}
-        <button onClick={handleNextPage} disabled={pageNumber === totalPages}>
-          Next
-        </button>
-      </div>
+          {Array.from({ length: totalPages }, (_, index) => (
+            <button key={index} onClick={() => setPageNumber(index + 1)}>
+              {index + 1}
+            </button>
+          ))}
+          <button onClick={handleNextPage} disabled={pageNumber === totalPages}>
+            Next
+          </button>
+        </div>
+      )}
     </div>
   )
 }
