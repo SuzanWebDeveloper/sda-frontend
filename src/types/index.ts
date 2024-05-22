@@ -48,6 +48,8 @@ export type User = {
 }
 
 export type UserState = {
+  users: User[] 
+  totalPages: number
   token: null | string
   userData: null | User
   error: null | string

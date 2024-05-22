@@ -11,7 +11,6 @@ import {
   UserDashboard,
   UserOrders,
   UserProfile,
-  Users
 } from "@/pages"
 import Navbar from "@/components/layout/Navbar"
 import Footer from "@/components/layout/Footer"
@@ -20,6 +19,7 @@ import { Register } from "@/pages/Register"
 import ProtectedRoute from "./ProtectedRoute"
 import AdminRoute from "./AdminRoute"
 import AdminCategories from "@/components/AdminCategories"
+import AdminUserManagement from "@/components/AdminUserManagement"
 
 
 const Index = () => {
@@ -44,7 +44,7 @@ const Index = () => {
             <Route path="admin" element={<AdminDashboard />} />
             <Route path="admin/categories" element={<AdminCategories />} />
             <Route path="admin/products" element={<Products />} />
-            <Route path="admin/users" element={<Users />} />
+            <Route path="admin/users" element={<AdminUserManagement />} />
             <Route path="admin/orders" element={<Orders />} />
           </Route>
 

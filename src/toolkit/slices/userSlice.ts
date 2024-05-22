@@ -11,6 +11,8 @@ const data = getLocalStorage("loginData", {
 })
 
 const initialState: UserState = {
+  users: [],
+  totalPages: 1,
   error: null,
   isLoading: false,
   token: data.token,
@@ -35,6 +37,28 @@ export const updateUser = createAsyncThunk(
     const response = await api.put(`/users/${userId}`, updateUserData, {
       headers: {
         Authorization: `Bearer ${token}`
+      }
+    })
+    return response.data
+  }
+)
+
+export const fetchUsers = createAsyncThunk(
+  "users/fetchUsers",
+  async ({
+    pageNumber,
+    pageSize
+  }: //searchTerm,
+  // sortBy
+  {
+    pageNumber: number
+    pageSize: number
+    // searchTerm: string
+    // sortBy: string
+  }) => {
+    const response = await api.get(`/users?pageNumber=${pageNumber}&pageSize=${pageSize}`, {
+      headers: {
+        Authorization: `Bearer ${getToken()}`
       }
     })
     return response.data
@@ -82,6 +106,12 @@ const userSlice = createSlice({
         token: state.token,
         userData: state.userData
       })
+    })
+
+    builder.addCase(fetchUsers.fulfilled, (state, action) => {
+      state.users = action.payload.data.$values
+      state.totalPages = action.payload.data.totalPages
+      state.isLoading = false
     })
 
     builder.addMatcher(
