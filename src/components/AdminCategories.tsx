@@ -2,7 +2,7 @@ import React, { useEffect } from "react"
 import { useDispatch } from "react-redux"
 import { AppDispatch } from "@/toolkit/store"
 
-import { fetchCategories } from "@/toolkit/slices/categorySlice"
+import { deleteCategory, fetchCategories } from "@/toolkit/slices/categorySlice"
 import AdminSidebar from "./ui/AdminSidebar"
 import useCategoriesState from "@/hook/useCategoriesState"
 
@@ -16,6 +16,17 @@ const AdminCategories = () => {
     }
     fetchData()
   }, [])
+
+  const handleDelete = async (id: string) => {
+      try {
+        const response = await dispatch(deleteCategory(id))
+        console.log(response)
+      } catch (error) {
+        console.log(error)
+      }
+  }
+
+   
 
   return (
     <div className="container flex-space-around">
@@ -40,16 +51,17 @@ const AdminCategories = () => {
                 categories.map((category) => (
                   <tr key={category.categoryId}>
                     <td className="category__name">{category.name}</td>
-                    <td className="category__details">
-                      {category.description}
-                    </td>
+                    <td className="category__details">{category.description}</td>
                     <td>
                       {/* <button className="btn" onClick={() => handleEdit(category)}>
                         Edit
-                      </button>
-                      <button className="btn delete-btn" onClick={() => handleDelete(category)}>
-                        Delete
                       </button> */}
+                      <button
+                        className="btn delete-btn"
+                        onClick={() => handleDelete(category.categoryId)}
+                      >
+                        Delete
+                      </button>
                     </td>
                   </tr>
                 ))}

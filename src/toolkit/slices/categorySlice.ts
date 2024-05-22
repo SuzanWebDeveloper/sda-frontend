@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 
 import api from "@/api"
 import { CategoryState } from "@/types"
+import { getToken } from "@/utils/localStorage"
 
 const initialState: CategoryState = {
   categories: [],
@@ -16,6 +17,18 @@ export const fetchCategories = createAsyncThunk("categories/fetchCategories", as
   return response.data
 })
 
+export const deleteCategory = createAsyncThunk(
+  "categories/deleteCategory",
+  async (categoryId: string) => {
+    await api.delete(`/categories/${categoryId}`, {
+      headers: {
+        Authorization: `Bearer ${getToken()}`
+      }
+    })
+    return categoryId
+  }
+)
+
 const categorySlice = createSlice({
   name: "categories",
   initialState: initialState,
@@ -23,6 +36,13 @@ const categorySlice = createSlice({
   extraReducers(builder) {
     builder.addCase(fetchCategories.fulfilled, (state, action) => {
       state.categories = action.payload.$values
+      state.isLoading = false
+    })
+
+    builder.addCase(deleteCategory.fulfilled, (state, action) => {
+      state.categories = state.categories.filter(
+        (category) => category.categoryId !== action.payload
+      )
       state.isLoading = false
     })
 
