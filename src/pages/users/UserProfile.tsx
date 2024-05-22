@@ -25,11 +25,8 @@ export const UserProfile = () => {
       toast.error("user data is not available")
       return
     }
-
     try {
-      const response = await dispatch(
-        updateUser({ updateUserData: data, userId: userData.userId })
-      )
+      const response = await dispatch(updateUser({ updateUserData: data, userId: userData.userId }))
       console.log(response)
     } catch (error) {
       console.log(error)
@@ -68,7 +65,7 @@ export const UserProfile = () => {
                   />
                   {errors.name && <p>{errors.name.message}</p>}
                 </div>
-{/* 
+                {/* 
                 <div className="form-field">
                   <label htmlFor="phone">Phone:</label>
                   <input type="tel" {...register("phone")} />

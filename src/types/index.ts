@@ -79,3 +79,8 @@ export type UpdateProfileFormData = {
   phone: number
   address: string
 }
+
+export type CreateCategoryFormData = {
+  name: string
+  description: string
+}

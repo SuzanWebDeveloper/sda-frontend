@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 
 import api from "@/api"
-import { CategoryState } from "@/types"
+import { CategoryState, CreateCategoryFormData } from "@/types"
 import { getToken } from "@/utils/localStorage"
 
 const initialState: CategoryState = {
@@ -29,13 +29,25 @@ export const deleteCategory = createAsyncThunk(
   }
 )
 
+export const createCategory = createAsyncThunk(
+  "categories/createCategory",
+  async (newCategory: CreateCategoryFormData) => {
+    const response = await api.post("/categories", newCategory, {
+      headers: {
+        Authorization: `Bearer ${getToken()}`
+      }
+    })
+    return response.data
+  }
+)
+
 const categorySlice = createSlice({
   name: "categories",
   initialState: initialState,
   reducers: {},
   extraReducers(builder) {
     builder.addCase(fetchCategories.fulfilled, (state, action) => {
-      state.categories = action.payload.$values
+      state.categories = action.payload.data.$values
       state.isLoading = false
     })
 
