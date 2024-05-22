@@ -1,12 +1,17 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import { AppDispatch } from "@/toolkit/store"
 import { SubmitHandler, useForm } from "react-hook-form"
 
-import { createCategory, deleteCategory, fetchCategories } from "@/toolkit/slices/categorySlice"
+import {
+  createCategory,
+  deleteCategory,
+  fetchCategories,
+  updateCategory
+} from "@/toolkit/slices/categorySlice"
 import AdminSidebar from "./ui/AdminSidebar"
 import useCategoriesState from "@/hook/useCategoriesState"
-import { CreateCategoryFormData } from "@/types"
+import { Category, CreateCategoryFormData } from "@/types"
 import { toast } from "react-toastify"
 
 const AdminCategories = () => {
@@ -16,8 +21,13 @@ const AdminCategories = () => {
   const {
     register,
     handleSubmit,
+    reset,
+    setValue,
     formState: { errors }
   } = useForm<CreateCategoryFormData>()
+
+  const [isEdit, setIsEdit] = useState(false)
+  const [selectedCategoryId, setSelectedCategoryId] = useState("")
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,23 +44,28 @@ const AdminCategories = () => {
       console.log(error)
     }
   }
-  const handleEdit = async (id: string) => {
+  const handleEdit = async (categoryId: string, category: Category) => {
     try {
-      //  const response = await dispatch(deleteCategory(id))
-      //  console.log(response)
+      setIsEdit(true)
+      setSelectedCategoryId(categoryId)
+      setValue("name", category.name)
+      setValue("description", category.description)
     } catch (error) {
       console.log(error)
     }
   }
 
-  const onSubmit: SubmitHandler<CreateCategoryFormData> = async (data) => {
-    // if (!userData?.userId) {
-    //   toast.error("user data is not available")
-    //   return
-    // }
+  const onSubmit: SubmitHandler<CreateCategoryFormData> = async (data, categoryId) => {
     try {
-       const response = await dispatch(createCategory(data))
-      console.log(response)
+      if (isEdit) {
+        console.log(categoryId)
+        await dispatch(updateCategory({ updateCategoryData: data, categoryId: selectedCategoryId }))
+        setIsEdit(false)
+      } else {
+        const response = await dispatch(createCategory(data))
+        console.log(response)
+      }
+      reset()
     } catch (error) {
       console.log(error)
     }
@@ -90,7 +105,7 @@ const AdminCategories = () => {
               {errors.description && <p>{errors.description.message}</p>}
             </div>
             <button className="btn" type="submit">
-              Create Category
+              {isEdit ? "Edit Category" : "Create category"}
             </button>
           </form>
         </div>
@@ -111,7 +126,10 @@ const AdminCategories = () => {
                     <td className="category__name">{category.name}</td>
                     <td className="category__details">{category.description}</td>
                     <td>
-                      <button className="btn" onClick={() => handleEdit(category.categoryId)}>
+                      <button
+                        className="btn"
+                        onClick={() => handleEdit(category.categoryId, category)}
+                      >
                         Edit
                       </button>
                       <button

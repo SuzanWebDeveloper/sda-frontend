@@ -41,6 +41,25 @@ export const createCategory = createAsyncThunk(
   }
 )
 
+export const updateCategory = createAsyncThunk(
+  "categories/updateCategory",
+  async ({
+    updateCategoryData,
+    categoryId
+  }: {
+    updateCategoryData: CreateCategoryFormData
+    categoryId: string
+  }) => {
+    const response = await api.put(`/categories/${categoryId}`, updateCategoryData, {
+      headers: {
+        Authorization: `Bearer ${getToken()}`
+      }
+    })
+    console.log(response.data)
+    return response.data
+  }
+)
+
 const categorySlice = createSlice({
   name: "categories",
   initialState: initialState,
@@ -56,6 +75,32 @@ const categorySlice = createSlice({
         (category) => category.categoryId !== action.payload
       )
       state.isLoading = false
+      // add toast success message here
+    })
+
+    builder.addCase(createCategory.fulfilled, (state, action) => {
+      state.categories.push(action.payload.data)
+      state.isLoading = false
+    })
+
+    builder.addCase(updateCategory.fulfilled, (state, action) => {
+      const foundCategory = state.categories.find(
+        (category) => category.categoryId == action.payload.data.categoryId
+      )
+      if (foundCategory) {
+        foundCategory.name = action.payload.data.name
+        foundCategory.description = action.payload.data.description
+      }
+      // if (state.category) {
+      //   state.userData.name = action.payload.data.name
+      //   state.userData.address = action.payload.data.address
+      //   state.isLoading = false
+      // }
+      // setLocalStorage("loginData", {
+      //   isLoggedIn: state.isLoggedIn,
+      //   token: state.token,
+      //   userData: state.userData
+      // })
     })
 
     builder.addMatcher(
