@@ -64,6 +64,18 @@ export const fetchUsers = createAsyncThunk(
     return response.data
   }
 )
+//-----------
+export const deleteUser = createAsyncThunk(
+  "users/deleteUser",
+  async (userId: string | undefined) => {
+    await api.delete(`/users/${userId}`, {
+      headers: {
+        Authorization: `Bearer ${getToken()}`
+      }
+    })
+    return userId
+  }
+)
 
 const userSlice = createSlice({
   name: "users",
@@ -114,6 +126,12 @@ const userSlice = createSlice({
       state.isLoading = false
     })
 
+    builder.addCase(deleteUser.fulfilled, (state, action) => {
+      state.users = state.users.filter((user) => user.userId !== action.payload)
+      state.isLoading = false
+      // add toast success message
+    })
+
     builder.addMatcher(
       (action) => action.type.endsWith("/pending"),
       (state) => {
@@ -125,7 +143,7 @@ const userSlice = createSlice({
     builder.addMatcher(
       (action) => action.type.endsWith("/rejected"),
       (state) => {
-        state.error = "An error occurred" //default string
+        state.error = "An error occurred"
         state.isLoading = false
       }
     )

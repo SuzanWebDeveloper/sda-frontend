@@ -1,14 +1,3 @@
-// import AdminSidebar from "@/components/ui/AdminSidebar"
-
-// export const AdminUserManagement = () => {
-//   return (
-//     <div className="container flex-space-around">
-//       <AdminSidebar />
-//       <div className="main-container">users content here</div>
-//     </div>
-//   )
-// }
-
 import React, { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import { AppDispatch } from "@/toolkit/store"
@@ -16,7 +5,7 @@ import { AppDispatch } from "@/toolkit/store"
 import AdminSidebar from "./ui/AdminSidebar"
 import { toast } from "react-toastify"
 import useUsersState from "@/hook/useUsersState"
-import { fetchUsers } from "@/toolkit/slices/userSlice"
+import { deleteUser, fetchUsers } from "@/toolkit/slices/userSlice"
 
 const AdminUserManagement = () => {
   const { users, totalPages, isLoading, error } = useUsersState()
@@ -24,8 +13,6 @@ const AdminUserManagement = () => {
 
   const [pageNumber, setPageNumber] = useState(1)
   const [pageSize, setPageSize] = useState(5)
-
-  // const [selectedCategoryId, setSelectedCategoryId] = useState("")
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,8 +23,8 @@ const AdminUserManagement = () => {
 
   const handleDelete = async (id: string | undefined) => {
     try {
-      // const response = await dispatch(deleteCategory(id))
-      // console.log(response)
+       const response = await dispatch(deleteUser(id))
+       console.log(response)
     } catch (error) {
       console.log(error)
     }
