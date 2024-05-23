@@ -8,4 +8,4 @@ export { AdminDashboard } from "./admins/AdminDashboard"
 export { UserProfile } from "./users/UserProfile"
 export { UserOrders } from "./users/UserOrders"
 export { Orders } from "../components/Orders"
-export { Products } from "../components/AdminProducts"
+

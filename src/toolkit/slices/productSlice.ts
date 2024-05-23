@@ -2,13 +2,15 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 
 import api from "@/api"
 import { ProductState } from "@/types"
+import { getToken } from "@/utils/localStorage"
 
 const initialState: ProductState = {
   products: [],
   totalPages: 1,
   product: null,
   error: null,
-  isLoading: false
+  isLoading: false,
+
 }
 
 // api call by Thunk
@@ -42,6 +44,18 @@ export const fetchProductBySlug = createAsyncThunk(
   }
 )
 
+export const deleteProduct = createAsyncThunk(
+  "products/deleteProduct",
+  async (id: string) => {
+    await api.delete(`/products/${id}`, {
+      headers: {
+        Authorization: `Bearer ${getToken()}`
+      }
+    })
+    return id
+  }
+)
+
 const productSlice = createSlice({
   name: "products",
   initialState: initialState,
@@ -60,6 +74,14 @@ const productSlice = createSlice({
       state.product = action.payload.data
       state.isLoading = false
     })
+
+        builder.addCase(deleteProduct.fulfilled, (state, action) => {
+          state.products = state.products.filter(
+            (product) => product.productId !== action.payload
+          )
+          state.isLoading = false
+          // add toast success message
+        })
 
     builder.addMatcher(
       (action) => action.type.endsWith("/pending"),

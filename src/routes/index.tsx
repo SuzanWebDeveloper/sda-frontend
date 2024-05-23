@@ -7,10 +7,9 @@ import {
   Home,
   Login,
   Orders,
-  Products,
   UserDashboard,
   UserOrders,
-  UserProfile,
+  UserProfile
 } from "@/pages"
 import Navbar from "@/components/layout/Navbar"
 import Footer from "@/components/layout/Footer"
@@ -20,6 +19,7 @@ import ProtectedRoute from "./ProtectedRoute"
 import AdminRoute from "./AdminRoute"
 import AdminCategories from "@/components/AdminCategories"
 import AdminUserManagement from "@/components/AdminUserManagement"
+import AdminProductsManagement from "@/components/AdminProductsManagement"
 
 
 const Index = () => {
@@ -43,7 +43,7 @@ const Index = () => {
           <Route path="/dashboard" element={<AdminRoute />}>
             <Route path="admin" element={<AdminDashboard />} />
             <Route path="admin/categories" element={<AdminCategories />} />
-            <Route path="admin/products" element={<Products />} />
+            <Route path="admin/products" element={<AdminProductsManagement />} />
             <Route path="admin/users" element={<AdminUserManagement />} />
             <Route path="admin/orders" element={<Orders />} />
           </Route>

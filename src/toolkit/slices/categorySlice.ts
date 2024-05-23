@@ -75,7 +75,7 @@ const categorySlice = createSlice({
         (category) => category.categoryId !== action.payload
       )
       state.isLoading = false
-      // add toast success message 
+      // add toast success message
     })
 
     builder.addCase(createCategory.fulfilled, (state, action) => {
@@ -101,6 +101,7 @@ const categorySlice = createSlice({
       //   token: state.token,
       //   userData: state.userData
       // })
+      state.isLoading = false
     })
 
     builder.addMatcher(

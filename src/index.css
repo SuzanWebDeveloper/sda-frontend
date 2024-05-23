@@ -163,6 +163,11 @@ main {
   /* background-color: antiquewhite; */
 }
 
+.table-img{
+  width: 100px;
+  height: 100px;
+}
+
 /* not working */
 .details {
   height: 100%;

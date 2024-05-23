@@ -25,7 +25,9 @@ export type Product = {
   price: number
   soldQuantity: number
   stock: number
-  // categories: Category[]
+  //categories: Category[]
+ // category: Category
+ categoryName: string
   createdAt: string
 }
 
@@ -48,7 +50,7 @@ export type User = {
 }
 
 export type UserState = {
-  users: User[] 
+  users: User[]
   totalPages: number
   token: null | string
   userData: null | User
@@ -85,4 +87,14 @@ export type UpdateProfileFormData = {
 export type CreateCategoryFormData = {
   name: string
   description: string
+}
+
+export type CreateProductFormData = {
+  image: string
+  name: FileList
+  description: string
+  price: number
+  stock: number
+  categoryName: string
+  categoryId: string
 }
