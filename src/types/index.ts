@@ -21,14 +21,14 @@ export type Product = {
   slug: string
   image: string
   description: string
-  //color: string
   price: number
   soldQuantity: number
   stock: number
+  color: string
   //categories: Category[]
- // category: Category
- categoryName: string
-  createdAt: string
+  // category: Category
+  categoryName: string
+  createdA: string
 }
 
 export type ProductState = {
@@ -90,11 +90,21 @@ export type CreateCategoryFormData = {
 }
 
 export type CreateProductFormData = {
-  image: string
-  name: FileList
+  image: FileList
+  name: string
   description: string
   price: number
   stock: number
-  categoryName: string
+  //categoryName: string
+  categoryId: string
+}
+
+export type CreateProductFormBackEnd = {
+  image: string
+  name: string
+  description: string
+  price: number
+  stock: number
+  //categoryName: string
   categoryId: string
 }

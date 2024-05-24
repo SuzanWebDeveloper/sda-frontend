@@ -1,29 +1,16 @@
-// export const AdminProductsManagement = () => {
-//   return (
-//     <div className="container flex-space-around">
-//       <AdminSidebar />
-//       <div className="main-container">products content here</div>
-//     </div>
-//   )
-// }
-
 import React, { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import { AppDispatch } from "@/toolkit/store"
-import { SubmitHandler, useForm } from "react-hook-form"
+import { Controller, SubmitHandler, useForm } from "react-hook-form"
+import { toast } from "react-toastify"
 
-import {
-  createCategory,
-  deleteCategory,
-  fetchCategories,
-  updateCategory
-} from "@/toolkit/slices/categorySlice"
+import { fetchCategories } from "@/toolkit/slices/categorySlice"
 import AdminSidebar from "./ui/AdminSidebar"
 import useCategoriesState from "@/hook/useCategoriesState"
-import { Category, CreateCategoryFormData, CreateProductFormData, Product } from "@/types"
-import { toast } from "react-toastify"
+import { CreateProductFormData, Product } from "@/types"
 import useProductsState from "@/hook/useProductsState"
-import { deleteProduct, fetchProducts } from "@/toolkit/slices/productSlice"
+import { createProduct, deleteProduct, fetchProducts } from "@/toolkit/slices/productSlice"
+import { uploadImageToCloudinary } from "@/utils/cloudinary"
 
 const AdminProductsManagement = () => {
   const { categories, isLoading, error } = useCategoriesState()
@@ -31,7 +18,7 @@ const AdminProductsManagement = () => {
 
   const dispatch: AppDispatch = useDispatch()
   const [pageNumber, setPageNumber] = useState(1)
-  const [pageSize, setPageSize] = useState(3)
+  const [pageSize, setPageSize] = useState(10) // change it later
   const [searchTerm, setSearchTerm] = useState("")
   const [sortBy, setSortBy] = useState("Name")
   const [imagePreview, setImagePreview] = useState<string | null>(null)
@@ -41,18 +28,19 @@ const AdminProductsManagement = () => {
     handleSubmit,
     reset,
     setValue,
+    control,
     formState: { errors }
   } = useForm<CreateProductFormData>()
 
   const [isEdit, setIsEdit] = useState(false)
   // const [selectedCategoryId, setSelectedCategoryId] = useState("")
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     await dispatch(fetchCategories())
-  //   }
-  //   fetchData()
-  // }, [])
+  useEffect(() => {
+    const fetchData = async () => {
+      await dispatch(fetchCategories())
+    }
+    fetchData()
+  }, [])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -91,6 +79,8 @@ const AdminProductsManagement = () => {
         ...data,
         image: imageUrl
       }
+      console.log(productData)
+      const response = await dispatch(createProduct(productData))
     } catch (error) {
       console.log("Product creation failed")
       toast.error("Product creation failed")
@@ -173,16 +163,24 @@ const AdminProductsManagement = () => {
               {errors.stock && <p>{errors.stock.message}</p>}
             </div>
             <br />
-            <label htmlFor="category">Category:</label>
-            {/* <input
-              type="text"
-              {...register("categoryId", {
-                required: "Category is required",
-                minLength: { value: 2, message: "Category must be at least 2 characters" }
-              })}
-            /> */}
-            {errors.categoryId && <p>{errors.categoryId.message}</p>}
-            <br /> {/*  remove br later */}
+            <label htmlFor="categoryId">Categories:</label>
+            <Controller
+              name="categoryId"
+              control={control}
+              rules={{
+                required: "Category is required"
+              }}
+              render={({ field }) => (
+                <select {...field}>
+                  {categories.map((category) => (
+                    <option key={category.categoryId} value={category.categoryId}>
+                      {category.name}
+                    </option>
+                  ))}
+                </select>
+              )}
+            />
+
             <br />
             <div className="form-field">
               <label htmlFor="image">Image:</label>

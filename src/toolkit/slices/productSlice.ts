@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 
 import api from "@/api"
-import { ProductState } from "@/types"
+import { CreateProductFormBackEnd, CreateProductFormData, Product, ProductState } from "@/types"
 import { getToken } from "@/utils/localStorage"
 
 const initialState: ProductState = {
@@ -9,8 +9,7 @@ const initialState: ProductState = {
   totalPages: 1,
   product: null,
   error: null,
-  isLoading: false,
-
+  isLoading: false
 }
 
 // api call by Thunk
@@ -44,15 +43,25 @@ export const fetchProductBySlug = createAsyncThunk(
   }
 )
 
-export const deleteProduct = createAsyncThunk(
-  "products/deleteProduct",
-  async (id: string) => {
-    await api.delete(`/products/${id}`, {
+export const deleteProduct = createAsyncThunk("products/deleteProduct", async (id: string) => {
+  await api.delete(`/products/${id}`, {
+    headers: {
+      Authorization: `Bearer ${getToken()}`
+    }
+  })
+  return id
+})
+
+export const createProduct = createAsyncThunk(
+  "products/createProduct",
+  async (newProduct: CreateProductFormBackEnd) => {
+    const response = await api.post("/products", newProduct, {
       headers: {
         Authorization: `Bearer ${getToken()}`
       }
     })
-    return id
+    console.log(response.data)
+    return response.data
   }
 )
 
@@ -75,13 +84,17 @@ const productSlice = createSlice({
       state.isLoading = false
     })
 
-        builder.addCase(deleteProduct.fulfilled, (state, action) => {
-          state.products = state.products.filter(
-            (product) => product.productId !== action.payload
-          )
-          state.isLoading = false
-          // add toast success message
-        })
+    builder.addCase(deleteProduct.fulfilled, (state, action) => {
+      state.products = state.products.filter((product) => product.productId !== action.payload)
+      state.isLoading = false
+      // add toast success message
+    })
+
+    builder.addCase(createProduct.fulfilled, (state, action) => {
+     // console.log(action.payload.data)
+      state.products.push(action.payload.data)
+      state.isLoading = false
+    })
 
     builder.addMatcher(
       (action) => action.type.endsWith("/pending"),
