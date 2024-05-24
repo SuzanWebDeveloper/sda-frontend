@@ -106,7 +106,6 @@ const productSlice = createSlice({
     builder.addCase(deleteProduct.fulfilled, (state, action) => {
       state.products = state.products.filter((product) => product.productId !== action.payload)
       state.isLoading = false
-      // add toast success message
     })
 
     builder.addCase(createProduct.fulfilled, (state, action) => {
