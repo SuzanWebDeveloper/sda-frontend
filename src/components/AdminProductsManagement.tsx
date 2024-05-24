@@ -9,7 +9,7 @@ import AdminSidebar from "./ui/AdminSidebar"
 import useCategoriesState from "@/hook/useCategoriesState"
 import { CreateProductFormData, Product } from "@/types"
 import useProductsState from "@/hook/useProductsState"
-import { createProduct, deleteProduct, fetchProducts } from "@/toolkit/slices/productSlice"
+import { createProduct, deleteProduct, fetchProducts, updateProduct } from "@/toolkit/slices/productSlice"
 import { uploadImageToCloudinary } from "@/utils/cloudinary"
 
 const AdminProductsManagement = () => {
@@ -33,7 +33,7 @@ const AdminProductsManagement = () => {
   } = useForm<CreateProductFormData>()
 
   const [isEdit, setIsEdit] = useState(false)
-  // const [selectedCategoryId, setSelectedCategoryId] = useState("")
+  const [selectedProductId, setSelectedProductId] = useState("")
 
   useEffect(() => {
     const fetchData = async () => {
@@ -59,54 +59,77 @@ const AdminProductsManagement = () => {
   }
   const handleEdit = async (product: Product) => {
     try {
+      // alert(JSON.stringify(product))
       setIsEdit(true)
-      // setSelectedCategoryId(categoryId)
-      // setValue("name", category.name)
-      // setValue("description", category.description)
+      setSelectedProductId(product.productId)
+      setValue("name", product.name)
+      setValue("description", product.description)
+      setValue("price", product.price)
+      setValue("stock", product.stock) // quantity
+      setImagePreview(product.image)
+      setValue("categoryId", product.category.categoryId)
     } catch (error) {
       console.log(error)
     }
   }
 
-  const onSubmit: SubmitHandler<CreateProductFormData> = async (data) => {
-    try {
-      let imageUrl = ""
-      if (data.image && data.image.length > 0) {
-        const file = data.image[0]
-        imageUrl = await uploadImageToCloudinary(file)
-      }
-      const productData = {
-        ...data,
-        image: imageUrl
-      }
-      console.log(productData)
-      const response = await dispatch(createProduct(productData))
-    } catch (error) {
-      console.log("Product creation failed")
-      toast.error("Product creation failed")
-    }
-  }
+  // const onSubmit: SubmitHandler<CreateProductFormData> = async (data) => {
+  //   try {
+  //     let imageUrl = ""
+  //     if (data.image && data.image.length > 0) {
+  //       const file = data.image[0]
+  //       imageUrl = await uploadImageToCloudinary(file)
+  //     }
+  //     const productData = {
+  //       ...data,
+  //       image: imageUrl
+  //     }
+  //     console.log(data)
+  //     console.log(productData)
+  //     const response = await dispatch(createProduct(productData))
+  //   } catch (error) {
+  //     console.log("Product creation failed")
+  //     toast.error("Product creation failed")
+  //   }
+  // }
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
     if (file) setImagePreview(URL.createObjectURL(file))
   }
 
-  // const onSubmit: SubmitHandler<CreateCategoryFormData> = async (data, categoryId) => {
-  //   try {
-  //     if (isEdit) {
-  //       console.log(categoryId)
-  //       await dispatch(updateCategory({ updateCategoryData: data, categoryId: selectedCategoryId }))
-  //       setIsEdit(false)
-  //     } else {
-  //       const response = await dispatch(createCategory(data))
-  //       console.log(response)
-  //     }
-  //     reset()
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
+  const onSubmit: SubmitHandler<CreateProductFormData> = async (data, productId) => {
+    try {
+      let imageUrl = ""
+      if (isEdit) {
+        if (data.image && data.image.length > 0) {
+          const file = data.image[0]
+          imageUrl = await uploadImageToCloudinary(file)
+        }
+        const updateProductData = {
+          ...data,
+          image: imageUrl
+        }
+        console.log(updateProductData)
+         await dispatch(updateProduct({ updateProductData: updateProductData, productId: selectedProductId }))
+        setIsEdit(false)
+      } else {
+        if (data.image && data.image.length > 0) {
+          const file = data.image[0]
+          imageUrl = await uploadImageToCloudinary(file)
+        }
+        const productData = {
+          ...data,
+          image: imageUrl
+        }
+        console.log(productData)
+        const response = await dispatch(createProduct(productData))
+      }
+      reset()
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <div className="container flex-space-around">

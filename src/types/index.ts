@@ -26,7 +26,8 @@ export type Product = {
   stock: number
   color: string
   //categories: Category[]
-  // category: Category
+   category: Category
+   categoryId: string;
   categoryName: string
   createdA: string
 }
@@ -95,7 +96,7 @@ export type CreateProductFormData = {
   description: string
   price: number
   stock: number
-  //categoryName: string
+  categoryName: string
   categoryId: string
 }
 

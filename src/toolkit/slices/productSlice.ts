@@ -65,6 +65,25 @@ export const createProduct = createAsyncThunk(
   }
 )
 
+export const updateProduct = createAsyncThunk(
+  "products/updateProduct",
+  async ({
+    updateProductData,
+    productId
+  }: {
+    updateProductData: CreateProductFormBackEnd
+    productId: string
+  }) => {
+    const response = await api.put(`/products/${productId}`, updateProductData, {
+      headers: {
+        Authorization: `Bearer ${getToken()}`
+      }
+    })
+    console.log(response.data)
+    return response.data
+  }
+)
+
 const productSlice = createSlice({
   name: "products",
   initialState: initialState,
@@ -91,8 +110,34 @@ const productSlice = createSlice({
     })
 
     builder.addCase(createProduct.fulfilled, (state, action) => {
-     // console.log(action.payload.data)
+      console.log(action.payload.data)
       state.products.push(action.payload.data)
+      state.isLoading = false
+    })
+
+    builder.addCase(updateProduct.fulfilled, (state, action) => {
+      const foundProduct = state.products.find(
+        (product) => product.productId == action.payload.data.productId
+      )
+      //  console.log(action.payload.data)
+      if (foundProduct) {
+        foundProduct.name = action.payload.data.name
+        foundProduct.description = action.payload.data.description
+        foundProduct.price = action.payload.data.price
+        foundProduct.stock = action.payload.data.stock
+        foundProduct.image = action.payload.data.image
+        foundProduct.slug = action.payload.data.slug
+      }
+      // if (state.category) {
+      //   state.userData.name = action.payload.data.name
+      //   state.userData.address = action.payload.data.address
+      //   state.isLoading = false
+      // }
+      // setLocalStorage("loginData", {
+      //   isLoggedIn: state.isLoggedIn,
+      //   token: state.token,
+      //   userData: state.userData
+      // })
       state.isLoading = false
     })
 
