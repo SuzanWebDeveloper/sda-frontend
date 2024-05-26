@@ -109,7 +109,7 @@ const productSlice = createSlice({
     })
 
     builder.addCase(createProduct.fulfilled, (state, action) => {
-      console.log(action.payload.data)
+      console.log(action.payload.data.categoryId)
       state.products.push(action.payload.data)
       state.isLoading = false
     })
@@ -118,8 +118,9 @@ const productSlice = createSlice({
       const foundProduct = state.products.find(
         (product) => product.productId == action.payload.data.productId
       )
-        console.log(foundProduct?.categoryId)
+       
       if (foundProduct) {
+         console.log(foundProduct.categoryId)
         foundProduct.name = action.payload.data.name
         foundProduct.description = action.payload.data.description
         foundProduct.price = action.payload.data.price

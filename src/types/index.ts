@@ -24,7 +24,7 @@ export type Product = {
   price: number
   soldQuantity: number
   stock: number
-  color: string
+  //color: string
   //categories: Category[]
    category: Category
    categoryId: string;

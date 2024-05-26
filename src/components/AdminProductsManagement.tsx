@@ -34,11 +34,22 @@ const AdminProductsManagement = () => {
     reset,
     setValue,
     control,
+    watch,
     formState: { errors }
   } = useForm<CreateProductFormData>()
 
   const [isEdit, setIsEdit] = useState(false)
   const [selectedProductId, setSelectedProductId] = useState("")
+
+  const [selectedCategoyId, setSelectedCategoryId] = useState("")
+
+  const watchedCategoryId = watch("categoryId")
+  useEffect(() => {
+    console.log("Selected category: ", watchedCategoryId)
+    setSelectedCategoryId(watchedCategoryId)
+  }, [watchedCategoryId])
+
+  console.log(selectedCategoyId)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -64,7 +75,7 @@ const AdminProductsManagement = () => {
   }
   const handleEdit = async (product: Product) => {
     try {
-      // alert(JSON.stringify(product))
+      alert(JSON.stringify(product))
       setIsEdit(true)
       setSelectedProductId(product.productId)
       setValue("name", product.name)
@@ -72,8 +83,8 @@ const AdminProductsManagement = () => {
       setValue("price", product.price)
       setValue("stock", product.stock) // quantity
       setImagePreview(product.image)
-      // setValue("categoryId", product.category.categoryId)
-      setValue("categoryId", product.categoryId)
+      setValue("categoryId", product.category.categoryId)
+      // setValue("categoryId", product.categoryId)
     } catch (error) {
       console.log(error)
     }
@@ -106,6 +117,7 @@ const AdminProductsManagement = () => {
 
   const onSubmit: SubmitHandler<CreateProductFormData> = async (data, productId) => {
     try {
+      //edit product
       let imageUrl = ""
       if (isEdit) {
         if (data.image && data.image.length > 0) {
@@ -114,14 +126,16 @@ const AdminProductsManagement = () => {
         }
         const updateProductData = {
           ...data,
-          image: imageUrl
+          image: imageUrl,
+          categoryId: selectedCategoyId
         }
-        console.log(updateProductData)
         await dispatch(
           updateProduct({ updateProductData: updateProductData, productId: selectedProductId })
         )
         setIsEdit(false)
-      } else {
+      }
+      //create product
+      else {
         if (data.image && data.image.length > 0) {
           const file = data.image[0]
           imageUrl = await uploadImageToCloudinary(file)
@@ -129,6 +143,7 @@ const AdminProductsManagement = () => {
         const productData = {
           ...data,
           image: imageUrl
+
         }
         console.log(productData)
         const response = await dispatch(createProduct(productData))
@@ -199,6 +214,7 @@ const AdminProductsManagement = () => {
               // rules={{
               //   required: "Category is required"
               // }}
+              // onChange={(e) => field.onChange(e.target.options)}
               render={({ field }) => (
                 <select {...field}>
                   {categories.map((category) => (
