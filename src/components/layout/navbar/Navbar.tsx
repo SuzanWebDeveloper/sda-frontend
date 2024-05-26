@@ -9,6 +9,7 @@ import "./navbar.css"
 import logo from "../../assets/logo.svg"
 import cart_icon from "../../assets/cart_icon.svg"
 import CartIcon from "@/components/CartIcon"
+import useCartState from "@/hook/useCartState"
 
 const Navbar = () => {
   const [menu, setMenu] = useState("")
@@ -16,6 +17,8 @@ const Navbar = () => {
   const dispatch: AppDispatch = useDispatch()
 
   const { isLoggedIn, userData } = useUsersState()
+  const { cartItems } = useCartState()
+
 
   const handleLogout = () => {
     dispatch(logoutUser())
@@ -89,7 +92,7 @@ const Navbar = () => {
         )}
         {/*  */}
         <Link to="/cart">
-          <CartIcon value="0"/>
+          <CartIcon value={cartItems && cartItems.length > 0 ? cartItems.length : 0}/>
         </Link>
         {/* <img src={cart_icon} className="nav-login-cart__icon" alt="cart-icon" />
         <div className="nav-cart-count">0</div> */}

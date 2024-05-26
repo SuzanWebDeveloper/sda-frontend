@@ -110,8 +110,3 @@ export type CreateProductFormBackEnd = {
   categoryId: string
 }
 
-export type CartState = {
-  cartItems: Product[]
-  // error: null | string
-  // isLoading: boolean
-}

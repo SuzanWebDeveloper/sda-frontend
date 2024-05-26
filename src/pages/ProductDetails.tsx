@@ -6,6 +6,8 @@ import { useParams } from "react-router-dom"
 import { fetchProductBySlug } from "@/toolkit/slices/productSlice"
 import useProductsState from "@/hook/useProductsState"
 import Breadcrumb from "@/components/Breadcrumb/Breadcrumb"
+import { addToCart } from "@/toolkit/slices/cartSlice"
+import { Product } from "@/types"
 
 export const ProductDetails = () => {
   const { slug } = useParams<{ slug: string }>()
@@ -20,6 +22,10 @@ export const ProductDetails = () => {
     }
     fetchData()
   }, [])
+
+  const handleAddToCart = (product: Product) => {
+    dispatch(addToCart(product))
+  }
 
   return (
     <article className="details">
@@ -37,15 +43,14 @@ export const ProductDetails = () => {
             <p className="product-details__description">{product.description}</p>
             <p className="product-details__price">
               {" "}
-            
               {product.price.toLocaleString("en-us", {
                 style: "currency",
                 currency: "USD"
               })}
             </p>
             <p>Product Added: {new Date(product.createdAt).toLocaleDateString()}</p>
-            {/* <button className="btn">Add to cart</button> */}
-            <button className="btn product__btn">
+
+            <button className="btn product__btn" onClick={() => handleAddToCart(product)}>
               Add To Cart &nbsp;<i className="fa fa-shopping-cart" aria-hidden="true"></i>
             </button>
           </div>

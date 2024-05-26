@@ -61,7 +61,7 @@ const Products = () => {
         </div>
       </div>
 
-      <h2>List of Products</h2>
+      {/* <h2>List of Products</h2> */}
       <section className="products">
         {products &&
           products.length > 0 &&
