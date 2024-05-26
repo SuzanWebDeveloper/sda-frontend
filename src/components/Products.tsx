@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux"
 import { AppDispatch } from "@/toolkit/store"
 
 import { fetchProducts } from "@/toolkit/slices/productSlice"
-import ProductCard from "./ProductCard"
+import ProductCard from "./layout/productsCard/ProductCard"
 import useProductsState from "@/hook/useProductsState"
 
 const Products = () => {

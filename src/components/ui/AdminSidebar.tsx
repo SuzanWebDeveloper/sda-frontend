@@ -9,14 +9,11 @@ const AdminSidebar = () => {
   return (
     <aside className="sidebar-container">
       <div>
-        <h2> Admin Profile</h2>
+        <h3> Admin Dashboard</h3>
         <p>{userData?.name}</p>
         <p>{userData?.email}</p>
       </div>
       <ul>
-        {/* <li>
-          <Link to="/dashboard/admin/profile">Profile</Link>
-        </li> */}
         <li>
           <Link to="/dashboard/admin/categories">Categories</Link>
         </li>

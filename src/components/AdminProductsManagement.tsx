@@ -9,7 +9,12 @@ import AdminSidebar from "./ui/AdminSidebar"
 import useCategoriesState from "@/hook/useCategoriesState"
 import { CreateProductFormData, Product } from "@/types"
 import useProductsState from "@/hook/useProductsState"
-import { createProduct, deleteProduct, fetchProducts, updateProduct } from "@/toolkit/slices/productSlice"
+import {
+  createProduct,
+  deleteProduct,
+  fetchProducts,
+  updateProduct
+} from "@/toolkit/slices/productSlice"
 import { uploadImageToCloudinary } from "@/utils/cloudinary"
 
 const AdminProductsManagement = () => {
@@ -67,7 +72,8 @@ const AdminProductsManagement = () => {
       setValue("price", product.price)
       setValue("stock", product.stock) // quantity
       setImagePreview(product.image)
-      setValue("categoryId", product.category.categoryId)
+      // setValue("categoryId", product.category.categoryId)
+      setValue("categoryId", product.categoryId)
     } catch (error) {
       console.log(error)
     }
@@ -111,7 +117,9 @@ const AdminProductsManagement = () => {
           image: imageUrl
         }
         console.log(updateProductData)
-         await dispatch(updateProduct({ updateProductData: updateProductData, productId: selectedProductId }))
+        await dispatch(
+          updateProduct({ updateProductData: updateProductData, productId: selectedProductId })
+        )
         setIsEdit(false)
       } else {
         if (data.image && data.image.length > 0) {
@@ -126,24 +134,24 @@ const AdminProductsManagement = () => {
         const response = await dispatch(createProduct(productData))
       }
       reset()
+      setImagePreview(null)
     } catch (error) {
       console.log(error)
     }
   }
 
   return (
-    <div className="container flex-space-around">
+    <div className="admin-container">
       <AdminSidebar />
       <div className="main-container">
         {isLoading && <p>Loading...</p>}
         {error && <p>Error{error}</p>}
 
-        <br />
-        <div>
+        <div className="product-form-container">
           <h3>Create Product</h3>
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={handleSubmit(onSubmit)} className="create-form">
             <div className="form-field">
-              <label htmlFor="name">Name:</label>
+              <label htmlFor="name">Name</label>
               <input
                 type="text"
                 {...register("name", {
@@ -152,8 +160,7 @@ const AdminProductsManagement = () => {
                 })}
               />
               {errors.name && <p>{errors.name.message}</p>}
-              <br /> {/*  remove br later */}
-              <label htmlFor="description">Description:</label>
+              <label htmlFor="description">Description</label>
               <textarea
                 id="description"
                 {...register("description", {
@@ -163,8 +170,9 @@ const AdminProductsManagement = () => {
               ></textarea>
               {errors.description && <p>{errors.description.message}</p>}
               <div className="form-field">
-                <label htmlFor="price">price:</label>
+                <label htmlFor="price">price</label>
                 <input
+                  className="form-filed__short"
                   type="number"
                   step="0.01"
                   {...register("price", {
@@ -173,10 +181,9 @@ const AdminProductsManagement = () => {
                 />
                 {errors.price && <p>{errors.price.message}</p>}
               </div>
-            </div>
-            <div className="form-field">
-              <label htmlFor="stock">stock:</label>
+              <label htmlFor="stock">stock</label>
               <input
+                className="form-filed__short"
                 type="number"
                 {...register("stock", {
                   required: "Stock is required"
@@ -185,14 +192,13 @@ const AdminProductsManagement = () => {
               />
               {errors.stock && <p>{errors.stock.message}</p>}
             </div>
-            <br />
             <label htmlFor="categoryId">Categories:</label>
             <Controller
               name="categoryId"
               control={control}
-              rules={{
-                required: "Category is required"
-              }}
+              // rules={{
+              //   required: "Category is required"
+              // }}
               render={({ field }) => (
                 <select {...field}>
                   {categories.map((category) => (
@@ -204,7 +210,6 @@ const AdminProductsManagement = () => {
               )}
             />
 
-            <br />
             <div className="form-field">
               <label htmlFor="image">Image:</label>
               <input
@@ -221,7 +226,7 @@ const AdminProductsManagement = () => {
           </form>
         </div>
         <section>
-          <h2>List of Products</h2>
+          <h3>List of Products</h3>
           <table>
             <thead>
               <tr>

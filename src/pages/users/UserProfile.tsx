@@ -34,7 +34,7 @@ export const UserProfile = () => {
   }
 
   return (
-    <div className="container flex-space-around">
+    <div className="user-container">
       <UserSidebar />
       <div className="main-container">
         {userData && (

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import { AppDispatch } from "@/toolkit/store"
 import { SubmitHandler, useForm } from "react-hook-form"
+import { toast } from "react-toastify"
 
 import {
   createCategory,
@@ -12,7 +13,6 @@ import {
 import AdminSidebar from "./ui/AdminSidebar"
 import useCategoriesState from "@/hook/useCategoriesState"
 import { Category, CreateCategoryFormData } from "@/types"
-import { toast } from "react-toastify"
 
 const AdminCategories = () => {
   const { categories, isLoading, error } = useCategoriesState()
@@ -54,6 +54,10 @@ const AdminCategories = () => {
       console.log(error)
     }
   }
+  const handleCancel = () => {
+    setIsEdit(false)
+    reset()
+  }
 
   const onSubmit: SubmitHandler<CreateCategoryFormData> = async (data, categoryId) => {
     try {
@@ -72,19 +76,17 @@ const AdminCategories = () => {
   }
 
   return (
-    <div className="container flex-space-around">
+    <div className="admin-container">
       <AdminSidebar />
       <div className="main-container">
         {isLoading && <p>Loading...</p>}
         {error && <p>Error{error}</p>}
 
-        <h2>List of Categories</h2>
-        <br />
-        <div>
-          <h3>Create category</h3>
-          <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="category-form-container">
+          <h3> {isEdit ? "Edit Category" : "Create category"}</h3>
+          <form onSubmit={handleSubmit(onSubmit)} className="create-form">
             <div className="form-field">
-              <label htmlFor="name">Name:</label>
+              <label htmlFor="name">Name</label>
               <input
                 type="text"
                 {...register("name", {
@@ -94,7 +96,7 @@ const AdminCategories = () => {
               />
               {errors.name && <p>{errors.name.message}</p>}
               <br /> {/*  remove br later */}
-              <label htmlFor="description">Description:</label>
+              <label htmlFor="description">Description</label>
               <textarea
                 id="description"
                 {...register("description", {
@@ -107,9 +109,16 @@ const AdminCategories = () => {
             <button className="btn" type="submit">
               {isEdit ? "Edit Category" : "Create category"}
             </button>
+            {isEdit && (
+              <button className="btn" onClick={handleCancel}>
+                Cancel
+              </button>
+            )}
           </form>
         </div>
+
         <section className="categories">
+          <h3>List of Categories</h3>
           <table>
             <thead>
               <tr>

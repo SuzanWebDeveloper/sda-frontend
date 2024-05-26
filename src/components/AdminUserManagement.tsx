@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import { AppDispatch } from "@/toolkit/store"
+import { toast } from "react-toastify"
 
 import AdminSidebar from "./ui/AdminSidebar"
-import { toast } from "react-toastify"
 import useUsersState from "@/hook/useUsersState"
 import { deleteUser, fetchUsers } from "@/toolkit/slices/userSlice"
 
@@ -31,14 +31,13 @@ const AdminUserManagement = () => {
   }
 
   return (
-    <div className="container flex-space-around">
+    <div className="admin-container">
       <AdminSidebar />
       <div className="main-container">
         {isLoading && <p>Loading...</p>}
         {error && <p>Error{error}</p>}
 
-        <h2>List of Users</h2>
-        <br />
+        <h3>List of Users</h3>
         <section className="categories">
           <table>
             <thead>

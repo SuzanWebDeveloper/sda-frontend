@@ -118,7 +118,7 @@ const productSlice = createSlice({
       const foundProduct = state.products.find(
         (product) => product.productId == action.payload.data.productId
       )
-      //  console.log(action.payload.data)
+        console.log(foundProduct?.categoryId)
       if (foundProduct) {
         foundProduct.name = action.payload.data.name
         foundProduct.description = action.payload.data.description
@@ -126,6 +126,8 @@ const productSlice = createSlice({
         foundProduct.stock = action.payload.data.stock
         foundProduct.image = action.payload.data.image
         foundProduct.slug = action.payload.data.slug
+        foundProduct.categoryId = action.payload.data.categoryId
+
       }
       // if (state.category) {
       //   state.userData.name = action.payload.data.name

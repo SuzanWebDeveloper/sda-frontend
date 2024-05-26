@@ -9,7 +9,7 @@ const UserSidebar = () => {
   return (
     <aside className="sidebar-container">
       <div>
-        <h2> User Profile</h2>
+        <h3> My Profile</h3>
         <p>{userData?.name}</p>
         <p>{userData?.email}</p>
       </div>

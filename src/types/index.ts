@@ -29,7 +29,7 @@ export type Product = {
    category: Category
    categoryId: string;
   categoryName: string
-  createdA: string
+  createdAt: string
 }
 
 export type ProductState = {

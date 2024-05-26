@@ -1,9 +1,8 @@
 import AdminSidebar from '@/components/ui/AdminSidebar'
-import React from 'react'
 
-export const Orders = () => {
+export const AdminOrders = () => {
   return (
-    <div className="container flex-space-around">
+    <div className="admin-container">
       <AdminSidebar />
       <div className="main-container">orders content here</div>
     </div>
