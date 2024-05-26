@@ -8,6 +8,7 @@ import useUsersState from "@/hook/useUsersState"
 import "./navbar.css"
 import logo from "../../assets/logo.svg"
 import cart_icon from "../../assets/cart_icon.svg"
+import CartIcon from "@/components/CartIcon"
 
 const Navbar = () => {
   const [menu, setMenu] = useState("")
@@ -87,8 +88,11 @@ const Navbar = () => {
           </>
         )}
         {/*  */}
-        <img src={cart_icon} className="nav-login-cart__icon" alt="cart-icon" />
-        <div className="nav-cart-count">0</div>
+        <Link to="/cart">
+          <CartIcon value="0"/>
+        </Link>
+        {/* <img src={cart_icon} className="nav-login-cart__icon" alt="cart-icon" />
+        <div className="nav-cart-count">0</div> */}
       </div>
     </nav>
   )

@@ -2,9 +2,19 @@ import { Link } from "react-router-dom"
 
 import { Product } from "@/types"
 import "./productCard.css"
+import { AppDispatch } from "@/toolkit/store"
+import { useDispatch } from "react-redux"
+import { addToCart } from "@/toolkit/slices/cartSlice"
 
 const ProductCard = (props: { product: Product }) => {
+
   const { product } = props // destructure
+  const dispatch: AppDispatch = useDispatch()
+
+  const handleAddToCart = (product: Product) =>
+    {
+      dispatch(addToCart(product))
+    }
 
   return (
     <article className="product card">
@@ -25,7 +35,7 @@ const ProductCard = (props: { product: Product }) => {
             </button>
           </Link>
 
-          <button className="btn product__btn">
+          <button className="btn product__btn" onClick={()=>handleAddToCart(product)}>
             Add To Cart &nbsp;<i className="fa fa-shopping-cart" aria-hidden="true"></i>
           </button>
         </div>

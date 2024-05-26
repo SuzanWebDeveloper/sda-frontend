@@ -143,10 +143,11 @@ const AdminProductsManagement = () => {
         const productData = {
           ...data,
           image: imageUrl
-
         }
-        console.log(productData)
+        //console.log(data) // has category id
+        //console.log(productData) // has category id
         const response = await dispatch(createProduct(productData))
+        //console.log(response) // has category id
       }
       reset()
       setImagePreview(null)
@@ -241,6 +242,7 @@ const AdminProductsManagement = () => {
             </button>
           </form>
         </div>
+        {/* List Products start here */}
         <section>
           <h3>List of Products</h3>
           <table>

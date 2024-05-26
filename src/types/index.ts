@@ -26,8 +26,8 @@ export type Product = {
   stock: number
   //color: string
   //categories: Category[]
-   category: Category
-   categoryId: string;
+  category: Category
+  categoryId: string
   categoryName: string
   createdAt: string
 }
@@ -108,4 +108,10 @@ export type CreateProductFormBackEnd = {
   stock: number
   //categoryName: string
   categoryId: string
+}
+
+export type CartState = {
+  cartItems: Product[]
+  // error: null | string
+  // isLoading: boolean
 }

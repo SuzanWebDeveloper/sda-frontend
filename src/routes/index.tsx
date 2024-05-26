@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import {
   About,
   AdminDashboard,
+  Cart,
   Error,
   Home,
   Login,
@@ -34,6 +35,7 @@ const Index = () => {
           <Route path="/products/:slug" element={<ProductDetails />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/cart" element={<Cart />} />
 
           <Route path="/dashboard" element={<ProtectedRoute />}>
             <Route path="user" element={<UserDashboard />} />
