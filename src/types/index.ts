@@ -110,3 +110,17 @@ export type CreateProductFormBackEnd = {
   categoryId: string
 }
 
+export type Order = {
+  orderId: string
+  date: string
+  totalPrice: number
+  orderStatus: string
+  userName: string
+}
+
+export type OrderState = {
+  orders: Order[]
+  totalPages: number
+  error: null | string
+  isLoading: boolean
+}

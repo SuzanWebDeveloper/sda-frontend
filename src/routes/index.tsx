@@ -21,7 +21,8 @@ import AdminCategories from "@/components/AdminCategories"
 import AdminUserManagement from "@/components/AdminUserManagement"
 import AdminProductsManagement from "@/components/AdminProductsManagement"
 import Navbar from "@/components/layout/navbar/Navbar"
-import { AdminOrders } from "@/components/AdminOrders"
+import AdminOrders from "@/components/AdminOrders"
+
 
 
 const Index = () => {
