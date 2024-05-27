@@ -63,6 +63,24 @@ h2 {
   align-items: center;
 }
 
+.filter-by-category {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-flow:wrap;
+}
+.filter-by-category__btn{
+   border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: var(--transition);
+  background-color: var(--secondary-color);
+  color: white;
+  min-width: 80px;
+}
+
 .section-title {
   font-size: 2rem;
   margin-bottom: 0.5rem;
@@ -417,6 +435,11 @@ label {
 .cart-img {
   width: 100px;
   height: 100px;
+}
+
+.active{
+background-color: #5c5c5c;
+color: #f1f1f1;
 }
 
 /* footer starts here */

@@ -22,23 +22,27 @@ export const fetchProducts = createAsyncThunk(
     pageSize,
     searchTerm,
     sortBy,
-    // selectedCategories
+    filteringTerm
   }: {
     pageNumber: number
     pageSize: number
     searchTerm: string
     sortBy: string
-   // selectedCategories: string[]
+    // filteringTerm: string[]
+    filteringTerm: string
   }) => {
     const params = new URLSearchParams({
       pageNumber: pageNumber.toString(),
       pageSize: pageSize.toString(),
       searchTerm,
-      sortBy
+      sortBy,
+      //?
+      filteringTerm
     })
-    // selectedCategories.forEach((categoryName) => {
-    //   params.append("selectedCategories", categoryName)
+    // filteringTerm.forEach((categoryName) => {
+    //   params.append("filteringTerm", categoryName)
     // })
+    console.log(params)
     // const response = await api.get(
     //   `/products?pageNumber=${pageNumber}&pageSize=${pageSize}&searchTerm=${searchTerm}&sortBy=${sortBy}`
     // )
@@ -46,6 +50,41 @@ export const fetchProducts = createAsyncThunk(
     return response.data
   }
 )
+
+
+// export const fetchProducts = createAsyncThunk(
+//   "products/fetchProducts",
+//   async ({
+//     pageNumber,
+//     pageSize,
+//     searchTerm,
+//     sortBy,
+//     selectedCategories
+//   }: {
+//     pageNumber: number
+//     pageSize: number
+//     searchTerm: string
+//     sortBy: string
+//     selectedCategories: string[]
+//   }) => {
+//     const params = new URLSearchParams({
+//       pageNumber: pageNumber.toString(),
+//       pageSize: pageSize.toString(),
+//       searchTerm,
+//       sortBy
+//       //?
+//     })
+//      selectedCategories.forEach((categoryName) => {
+//        params.append("selectedCategories", categoryName)
+//      })
+//      console.log(params)
+//     // const response = await api.get(
+//     //   `/products?pageNumber=${pageNumber}&pageSize=${pageSize}&searchTerm=${searchTerm}&sortBy=${sortBy}`
+//     // )
+//     const response = await api.get("/products", { params })
+//     return response.data
+//   }
+// )
 
 export const fetchProductBySlug = createAsyncThunk(
   "products/fetchProductBySlug",

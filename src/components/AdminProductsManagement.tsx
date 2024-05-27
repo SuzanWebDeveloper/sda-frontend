@@ -27,6 +27,8 @@ const AdminProductsManagement = () => {
   const [searchTerm, setSearchTerm] = useState("")
   const [sortBy, setSortBy] = useState("Name")
   const [imagePreview, setImagePreview] = useState<string | null>(null)
+  // const [filteringTerm, setFilteringTerm] = useState<string[]>([])
+  const [filteringTerm, setFilteringTerm] = useState("")
 
   const {
     register,
@@ -40,7 +42,6 @@ const AdminProductsManagement = () => {
 
   const [isEdit, setIsEdit] = useState(false)
   const [selectedProductId, setSelectedProductId] = useState("")
-
   const [selectedCategoyId, setSelectedCategoryId] = useState("")
 
   const watchedCategoryId = watch("categoryId")
@@ -60,7 +61,7 @@ const AdminProductsManagement = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      await dispatch(fetchProducts({ pageNumber, pageSize, searchTerm, sortBy }))
+      await dispatch(fetchProducts({ pageNumber, pageSize, searchTerm, sortBy, filteringTerm }))
     }
     fetchData()
   }, [pageNumber, searchTerm, sortBy])
