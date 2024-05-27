@@ -5,10 +5,13 @@ import { AppDispatch } from "@/toolkit/store"
 import { fetchProducts } from "@/toolkit/slices/productSlice"
 import ProductCard from "./layout/productsCard/ProductCard"
 import useProductsState from "@/hook/useProductsState"
+import useCategoriesState from "@/hook/useCategoriesState"
+import { fetchCategories } from "@/toolkit/slices/categorySlice"
 
 const Products = () => {
   // fetch data and access store for all products
   const { products, isLoading, error, totalPages } = useProductsState()
+  const { categories, isLoading: categoryIsLoading } = useCategoriesState()
 
   const dispatch: AppDispatch = useDispatch()
 
@@ -16,14 +19,45 @@ const Products = () => {
   const [pageSize, setPageSize] = useState(3)
   const [searchTerm, setSearchTerm] = useState("")
   const [sortBy, setSortBy] = useState("Name")
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([])
 
   // dispatch an action to dispatch products
   useEffect(() => {
     const fetchData = async () => {
-      await dispatch(fetchProducts({ pageNumber, pageSize, searchTerm, sortBy }))
+      await dispatch(
+        fetchProducts({ pageNumber, pageSize, searchTerm, sortBy, selectedCategories })
+      )
     }
     fetchData()
-  }, [pageNumber, searchTerm, sortBy])
+  }, [pageNumber, searchTerm, sortBy, selectedCategories])
+
+    useEffect(() => {
+      const fetchData = async () => {
+        await dispatch(
+          fetchProducts({ pageNumber, pageSize, searchTerm, sortBy })
+        )
+      }
+      fetchData()
+    }, [pageNumber, searchTerm, sortBy])
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     await dispatch(
+  //       fetchProducts({ pageNumber, pageSize, searchTerm, sortBy, selectedCategories })
+  //     )
+  //   }
+  //   fetchData()
+  // }, [pageNumber, searchTerm, sortBy, selectedCategories])
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await dispatch(fetchCategories())
+    }
+    fetchData()
+  }, [])
+
+
 
   const handleNextPage = () => {
     setPageNumber((currentPage) => currentPage + 1)
@@ -38,11 +72,41 @@ const Products = () => {
     setSortBy(e.target.value)
   }
 
+  const handleCategoryChange = (name: string) => {
+    setSelectedCategories((prevSelected) =>
+      prevSelected.includes(name)
+        ? prevSelected.filter((name) => name !== name)
+        : [...prevSelected, name]
+    )
+  }
+
+console.log(selectedCategories)
+
   return (
     <div>
       {isLoading && <p>Loading...</p>}
       {error && <p>Error{error}</p>}
 
+      <div className="filter-by-category">
+        <p>Filter by Category</p>
+        {categories &&
+          categories.length > 0 &&
+          categories.map((category) => (
+            <div key={category.categoryId}>
+              <label htmlFor="categories">
+                <input
+                  type="checkbox"
+                  value={category.name}
+                  checked={selectedCategories.includes(category.name)}
+                  onChange={() => handleCategoryChange(category.name)}
+                />
+                {category.name}
+              </label>
+            </div>
+          ))}
+      </div>
+      <br />
+      <h2>List of Products</h2>
       <div className="action flex-space-around">
         <div>
           <input

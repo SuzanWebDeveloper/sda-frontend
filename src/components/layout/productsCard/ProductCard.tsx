@@ -35,7 +35,7 @@ const ProductCard = (props: { product: Product }) => {
             </button>
           </Link>
 
-          <button className="btn product__btn" onClick={()=>handleAddToCart(product)}>
+          <button className="btn product__btn" onClick={() => handleAddToCart(product)}>
             Add To Cart &nbsp;<i className="fa fa-shopping-cart" aria-hidden="true"></i>
           </button>
         </div>

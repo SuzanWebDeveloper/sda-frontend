@@ -9,8 +9,6 @@ export const Home = () => {
       <Hero />
       <div className="container flex-space-around">
         <div>
-          <br/>
-          <h2>List of Products</h2>
           <div className="main-container">
             <Products />
           </div>

@@ -21,16 +21,28 @@ export const fetchProducts = createAsyncThunk(
     pageNumber,
     pageSize,
     searchTerm,
-    sortBy
+    sortBy,
+    // selectedCategories
   }: {
     pageNumber: number
     pageSize: number
     searchTerm: string
     sortBy: string
+   // selectedCategories: string[]
   }) => {
-    const response = await api.get(
-      `/products?pageNumber=${pageNumber}&pageSize=${pageSize}&searchTerm=${searchTerm}&sortBy=${sortBy}`
-    )
+    const params = new URLSearchParams({
+      pageNumber: pageNumber.toString(),
+      pageSize: pageSize.toString(),
+      searchTerm,
+      sortBy
+    })
+    // selectedCategories.forEach((categoryName) => {
+    //   params.append("selectedCategories", categoryName)
+    // })
+    // const response = await api.get(
+    //   `/products?pageNumber=${pageNumber}&pageSize=${pageSize}&searchTerm=${searchTerm}&sortBy=${sortBy}`
+    // )
+    const response = await api.get("/products", { params })
     return response.data
   }
 )
@@ -120,7 +132,6 @@ const productSlice = createSlice({
       )
        
       if (foundProduct) {
-         console.log(foundProduct.categoryId)
         foundProduct.name = action.payload.data.name
         foundProduct.description = action.payload.data.description
         foundProduct.price = action.payload.data.price
@@ -128,18 +139,7 @@ const productSlice = createSlice({
         foundProduct.image = action.payload.data.image
         foundProduct.slug = action.payload.data.slug
         foundProduct.categoryId = action.payload.data.categoryId
-
       }
-      // if (state.category) {
-      //   state.userData.name = action.payload.data.name
-      //   state.userData.address = action.payload.data.address
-      //   state.isLoading = false
-      // }
-      // setLocalStorage("loginData", {
-      //   isLoggedIn: state.isLoggedIn,
-      //   token: state.token,
-      //   userData: state.userData
-      // })
       state.isLoading = false
     })
 

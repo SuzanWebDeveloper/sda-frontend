@@ -156,6 +156,14 @@ const AdminProductsManagement = () => {
     }
   }
 
+  //------------
+  const getCategoryName = (id: string) => {
+    const foundCategory = categories.find((category) => category.categoryId === id)
+    if (foundCategory) return foundCategory.name
+  }
+
+  //----------
+
   return (
     <div className="admin-container">
       <AdminSidebar />
@@ -218,7 +226,7 @@ const AdminProductsManagement = () => {
               // onChange={(e) => field.onChange(e.target.options)}
               render={({ field }) => (
                 <select {...field}>
-                  {categories.map((category) => (
+                  {categories?.map((category) => (
                     <option key={category.categoryId} value={category.categoryId}>
                       {category.name}
                     </option>
@@ -267,7 +275,8 @@ const AdminProductsManagement = () => {
                       <img src={product.image} alt={product.slug} className="table-img" />
                     </td>
                     <td>{product.name}</td>
-                    <td>{product.categoryName}</td>
+                    <td>{getCategoryName(product.categoryId)}</td>
+                    {/* <td>{product.category.name}</td> */}
                     <td>{product.description.substring(0, 100)}...</td>
                     <td>{product.price}</td>
                     <td>{product.soldQuantity}</td>
