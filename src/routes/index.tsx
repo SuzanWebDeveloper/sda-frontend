@@ -7,6 +7,7 @@ import {
   Error,
   Home,
   Login,
+  Product,
   UserDashboard,
   UserOrders,
   UserProfile
@@ -32,6 +33,7 @@ const Index = () => {
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/product" element={<Product />} />
           <Route path="/about" element={<About />} />
           <Route path="/products/:slug" element={<ProductDetails />} />
           <Route path="/register" element={<Register />} />

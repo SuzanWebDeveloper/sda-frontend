@@ -18,8 +18,8 @@ import {
 import { uploadImageToCloudinary } from "@/utils/cloudinary"
 
 const AdminProductsManagement = () => {
-  const { categories, isLoading, error } = useCategoriesState()
-  const { products } = useProductsState()
+  const { categories,isLoading:categoryIsLoading, error } = useCategoriesState()
+  const { products, isLoading } = useProductsState()
 
   const dispatch: AppDispatch = useDispatch()
   const [pageNumber, setPageNumber] = useState(1)
@@ -76,7 +76,6 @@ const AdminProductsManagement = () => {
   }
   const handleEdit = async (product: Product) => {
     try {
-      alert(JSON.stringify(product))
       setIsEdit(true)
       setSelectedProductId(product.productId)
       setValue("name", product.name)
@@ -169,7 +168,7 @@ const AdminProductsManagement = () => {
     <div className="admin-container">
       <AdminSidebar />
       <div className="main-container">
-        {isLoading && <p>Loading...</p>}
+        {isLoading && categoryIsLoading && <p>Loading...</p>}
         {error && <p>Error{error}</p>}
 
         <div className="product-form-container">

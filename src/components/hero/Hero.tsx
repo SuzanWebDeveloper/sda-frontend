@@ -2,6 +2,7 @@ import React from "react"
 import logo from "../../assets/logo.svg"
 
 import "./hero.css"
+import { Link } from "react-router-dom"
 
 const Hero = () => {
   return (
@@ -12,9 +13,11 @@ const Hero = () => {
           <h2 className="hero__subtitle">
             Explore the high quality body and hair care rose products!
             <br />
-            <button className="button" role="button">
-              Shop Now
-            </button>
+            <Link to="product">
+              <button className="button" role="button">
+                Shop Now
+              </button>
+            </Link>
           </h2>
 
           <div>
