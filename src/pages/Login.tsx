@@ -23,7 +23,7 @@ export const Login = () => {
       // toast.success(response.payload.message)
        navigate(role == "admin" ? "/dashboard/admin" : "/dashboard/user")
     } catch (error: any) {
-      toast.error(error.message || "Login failed")
+      toast.error("User name or password is wrong")
     }
   }
 

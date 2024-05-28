@@ -26,76 +26,78 @@ const Navbar = () => {
 
   return (
     <nav className="navbar">
-      <div className="nav-logo">
-        <Link to="/">
-          <img src={logo} alt="logo" />
-        </Link>
-      </div>
-      <ul className="nav-menu">
-        <li
-          onClick={() => {
-            setMenu("home")
-          }}
-        >
-          <Link className="nav__link" to="/">
-            Home{menu === "home" ? <hr /> : <></>}
+      <div className="navbar-container">
+        <div className="nav-logo">
+          <Link to="/">
+            <img src={logo} alt="logo" />
           </Link>
-        </li>
-        <li
-          onClick={() => {
-            setMenu("products")
-          }}
-        >
-          <Link className="nav__link" to="/about">
-            Products{menu === "products" ? <hr /> : <></>}
-          </Link>
-        </li>
-        <li
-          onClick={() => {
-            setMenu("about")
-          }}
-        >
-          <Link className="nav__link" to="/about">
-            About{menu === "about" ? <hr /> : <></>}
-          </Link>
-        </li>
-      </ul>
-      <div className="nav-login-cart">
-        {isLoggedIn && (
-          <>
-            <ul>
-              <li
-                onClick={() => {
-                  setMenu("account")
-                }}
-              >
-                <Link
-                  className="nav__link"
-                  to={`/dashboard/${userData && userData.role == "admin" ? "admin" : "user"}`}
+        </div>
+        <ul className="nav-menu">
+          <li
+            onClick={() => {
+              setMenu("home")
+            }}
+          >
+            <Link className="nav__link" to="/">
+              Home{menu === "home" ? <hr /> : <></>}
+            </Link>
+          </li>
+          <li
+            onClick={() => {
+              setMenu("products")
+            }}
+          >
+            <Link className="nav__link" to="/about">
+              Products{menu === "products" ? <hr /> : <></>}
+            </Link>
+          </li>
+          <li
+            onClick={() => {
+              setMenu("about")
+            }}
+          >
+            <Link className="nav__link" to="/about">
+              About{menu === "about" ? <hr /> : <></>}
+            </Link>
+          </li>
+        </ul>
+        <div className="nav-login-cart">
+          {isLoggedIn && (
+            <>
+              <ul>
+                <li
+                  onClick={() => {
+                    setMenu("account")
+                  }}
                 >
-                  {userData && userData.role == "admin" ? "Admin Dashboard" : "My Account"}
-                  {menu === "account" ? <hr /> : <></>}
-                </Link>
-              </li>
-            </ul>
-            <Link className="nav__link" to="/" onClick={handleLogout}>
-              <button>Logout</button>
-            </Link>
-          </>
-        )}
-        {!isLoggedIn && (
-          <>
-            <Link className="nav__link" to="/login">
-              <button>Login</button>
-            </Link>
-          </>
-        )}
-        {/*  */}
-        <Link to="/cart">
-          <CartIcon value={cartItems && cartItems.length > 0 ? cartItems.length : 0}/>
-        </Link>
-        {/* <img src={cart_icon} className="nav-login-cart__icon" alt="cart-icon" />
+                  <Link
+                    className="nav__link"
+                    to={`/dashboard/${userData && userData.role == "admin" ? "admin" : "user"}`}
+                  >
+                    {userData && userData.role == "admin" ? "Admin Dashboard" : "My Account"}
+                    {menu === "account" ? <hr /> : <></>}
+                  </Link>
+                </li>
+              </ul>
+              <Link className="nav__link" to="/" onClick={handleLogout}>
+                <button>Logout</button>
+              </Link>
+            </>
+          )}
+          {!isLoggedIn && (
+            <>
+              <Link className="nav__link" to="/login">
+                <button>Login</button>
+              </Link>
+            </>
+          )}
+          {/*  */}
+          <Link to="/cart">
+            <CartIcon value={cartItems && cartItems.length > 0 ? cartItems.length : 0} />
+          </Link>
+          {/* <img src={cart_icon} className="nav-login-cart__icon" alt="cart-icon" />
         <div className="nav-cart-count">0</div> */}
+        </div>
       </div>
     </nav>
   )

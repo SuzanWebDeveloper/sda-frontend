@@ -5,12 +5,21 @@
   /* background-image: url(../assets/hero.jpeg); */
   background-size: cover;
   background-image: center;
-  padding-left: 9.4rem;
+  /* padding-left: 9.4rem; */
   background-color: pink;
 }
 
+.hero-container{
+  display: flex;
+  /* align-content: center; */
+  flex-direction: column;
+  margin: 0 6rem;
+  justify-content: flex-start;
+   padding-top: 7rem;
+}
+
 .hero__title {
-  padding-top: 7rem;
+ 
   font-size: 2.2rem;
   color: #ffffff;
   text-align: left;
@@ -34,6 +43,7 @@
   /* border-radius: 3px; */
   transition: all 0.2s ease;
 }
+
 
 button.button:active {
   transform: scale(0.88);

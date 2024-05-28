@@ -52,14 +52,14 @@ export const Cart = () => {
     <div className="cart">
       {cartItems && cartItems.length > 0 ? (
         <>
-          <div className="cart-heading card">
+          <div className="cart-heading ">
             <h2> Shopping Cart [{cartItems.length}] items</h2>
             <button onClick={handleRemoveAllProductsFromCart}>Remove all Items</button>
             <button onClick={() => navigate("/")}>Shop more</button>
           </div>
 
-          <div className="cart-body card flex-space-around">
-            <div>
+          <div className="cart-body  flex-space-around">
+            <div className="cart-items">
               {cartItems.map((cartItem) => (
                 <div key={cartItem.productId} className=" cart-item flex-space-around">
                   <div className="cart-item__left">
@@ -72,32 +72,49 @@ export const Cart = () => {
                   </div>
                   <div className="cart-item__right">
                     <div className="quantity-controls">
-                      <button onClick={()=> {handleIncrementQuantity(cartItem.productId)}}
-                      disabled={cartItem.stock == cartItem.orderQuantity}
+                      <button
+                        onClick={() => {
+                          handleIncrementQuantity(cartItem.productId)
+                        }}
+                        disabled={cartItem.stock == cartItem.orderQuantity}
+                        className="btn-control"
                       >
-                        +</button>
+                        +
+                      </button>
                       <span>{cartItem.orderQuantity}</span>
-                      <button onClick={()=> {handledecrementQuantity(cartItem.productId)}}>-</button>
+                      <button
+                        onClick={() => {
+                          handledecrementQuantity(cartItem.productId)
+                        }}
+                        className="btn-control"
+                      >
+                        -
+                      </button>
                     </div>
-                    <button onClick={() => handleRemoveFromCart(cartItem.productId)}>
+                    <button
+                      onClick={() => handleRemoveFromCart(cartItem.productId)}
+                      className="delete-btn"
+                    >
                       <i className="fas fa-trash-alt"></i>
                     </button>
                   </div>
                 </div>
               ))}
             </div>
-            <div>
+            <div className="cart-summary ">
               <h2>Cart Summary</h2>
-              <h3> Total amount: {cartTotal()}</h3>
+              <h4> Total amount: {cartTotal()}</h4>
 
               {/* if I have time implement update address */}
               {isLoggedIn ? (
                 <div>
                   {" "}
-                  user info
+                  <br />
+                  Shipping Address:
                   <p>{userData && userData.address}</p>
-                  <button>Update Delivery Address</button><br/>
-                  <button>Pay here</button>
+                  {/* <button>Update Delivery Address</button>
+                  <br />
+                  <button>Pay here</button> */}
                 </div>
               ) : (
                 <div> login to proceed for payment</div>

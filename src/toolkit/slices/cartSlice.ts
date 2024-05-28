@@ -1,4 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
+import { toast } from "react-toastify"
 
 import { Product } from "@/types"
 import { getLocalStorage, setLocalStorage } from "@/utils/localStorage"
@@ -32,6 +33,7 @@ const cartSlice = createSlice({
         state.cartItems.push({ ...action.payload, orderQuantity: 1 })
       }
       setLocalStorage("cart", { cartItems: state.cartItems })
+       toast.success("Product added to cart")
     },
 
    incrementQuantity: (state, action: PayloadAction<string>) => {

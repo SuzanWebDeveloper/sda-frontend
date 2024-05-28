@@ -1,8 +1,14 @@
 .navbar {
-  display: flex;
-  justify-content: space-around;
-  padding: 16px;
   background-color: #e48893;
+}
+.navbar-container {
+  display: flex;
+  /* justify-content: space-around; */
+  justify-content: space-between;
+  /* padding: 0 100px; */
+  padding: 16px 0;
+  background-color: #e48893;
+  margin: 0 5.6rem;
 }
 
 .nav-logo {
@@ -41,11 +47,6 @@
   gap: 15px;
 }
 
-.nav-login-cart__icon {
-  width: 25px;
-  height: 25px;
-}
-
 .nav-login-cart button {
   width: 6rem;
   height: 2rem;
@@ -59,10 +60,21 @@
   font-weight: 500;
   background: #e48893;
   cursor: pointer;
+  transition: var(--transition);
 }
 
 .nav-login-cart button:active {
-  background: #f3f3f3;
+  background: black;
+}
+
+.nav-login-cart button:hover {
+  background: rgb(211, 113, 118);
+}
+
+.nav-login-cart__icon {
+  width: 25px;
+  height: 25px;
+  position: relative;
 }
 
 .nav-cart-count {
@@ -71,15 +83,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: -25px;
-  margin-left: -26px;
+  margin-top: -39px;
+  margin-left: 14px;
   border-radius: 11px;
   font-size: 14px;
   background: red;
   color: white;
+  position: absolute;
 }
 
 .nav__link {
   color: white;
 }
-

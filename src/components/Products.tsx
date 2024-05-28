@@ -15,6 +15,7 @@ const Products = () => {
 
   const dispatch: AppDispatch = useDispatch()
 
+
   const [pageNumber, setPageNumber] = useState(1)
   const [pageSize] = useState(3)
   const [searchTerm, setSearchTerm] = useState("")
@@ -36,6 +37,7 @@ const Products = () => {
     fetchData()
   }, [])
 
+
   const handleNextPage = () => {
     setPageNumber((currentPage) => currentPage + 1)
   }
@@ -53,7 +55,7 @@ const Products = () => {
     setFilteringTerm(name)
   }
 
-  console.log(filteringTerm)
+
 
   return (
     <div>
@@ -83,8 +85,8 @@ const Products = () => {
           ))}
       </div>
       <br />
-      <h2>List of Products</h2>
-      <div className="action flex-space-around">
+      {/* <h2>List of Products</h2> */}
+      <div className="action flex-space-between">
         <div>
           <input
             type="text"
@@ -114,7 +116,7 @@ const Products = () => {
             Previous
           </button>
           {Array.from({ length: totalPages }, (_, index) => (
-            <button key={index} onClick={() => setPageNumber(index + 1)}>
+            <button key={index} onClick={() => setPageNumber(index + 1)} className="page-btn">
               {index + 1}
             </button>
           ))}
