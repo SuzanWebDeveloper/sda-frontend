@@ -95,3 +95,18 @@
 .nav__link {
   color: white;
 }
+
+@media screen and (max-width: 600px) {
+.navbar-container {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-around; */
+  justify-content: space-between;
+  /* padding: 0 100px; */
+  padding: 16px 0;
+  background-color: #e48893;
+  align-items: center;
+  margin: auto;
+  
+}
+}

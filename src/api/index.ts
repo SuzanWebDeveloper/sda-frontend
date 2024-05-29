@@ -8,7 +8,6 @@ if (!isDevelopment) {
   baseURL = "https://backend-ecommerce-sda-service.onrender.com/api"
 }
 
-//https://backend-ecommerce-sda-service.onrender.com/api"
 
 const api = axios.create({
   baseURL

@@ -74,7 +74,7 @@ button.button:hover {
   }
   .hero {
     /* height: 80vh; */
-    min-height: 400px;
+    min-height: 300px;
     background-image: url("../../images/hero1.jpg");
     background-size: cover;
     background-image: center;
@@ -82,4 +82,35 @@ button.button:hover {
     padding-right: 0.5rem;
     background-color: pink;
   }
+  
+}
+@media screen and (max-width: 600px) {
+  .hero__title {
+    padding-top: 0.2rem;
+    font-size: 1.5rem;
+  }
+
+  .hero__subtitle {
+    padding-top: 0.2rem;
+    font-size: 1rem;
+  }
+  .hero {
+    /* height: 80vh; */
+    height: 400px;
+    background-image: url("../../images/hero1.jpg");
+    background-size: cover;
+    background-image: center;
+    padding-left: 0.5rem;
+    padding-right: 0rem;
+    background-color: pink;
+  }
+  .hero-container {
+  display: flex;
+  /* align-content: center; */
+  flex-direction: column;
+  margin: 0 3.2rem;
+  justify-content: flex-start;
+  padding-top: 2.5rem;
+ 
+}
 }
