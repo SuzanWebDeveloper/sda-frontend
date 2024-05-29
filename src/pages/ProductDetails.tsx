@@ -51,7 +51,7 @@ export const ProductDetails = () => {
             <p>Product Added: {new Date(product.createdAt).toLocaleDateString()}</p>
 
             <button className="btn product__btn" onClick={() => handleAddToCart(product)}>
-              Add To Cart &nbsp;<i className="fa fa-shopping-cart" aria-hidden="true"></i>
+              <i className="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;Add To Cart
             </button>
           </div>
         </div>

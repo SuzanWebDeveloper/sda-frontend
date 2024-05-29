@@ -11,15 +11,16 @@ const UserSidebar = () => {
       <div>
         <h3> My Profile</h3>
         <p>{userData?.name}</p>
-        <p>{userData?.email}</p>
+        <hr/>
+        <br/>
       </div>
       <ul>
         <li>
           <Link to="/dashboard/user/profile">Profile</Link>
         </li>
-        <li>
+        {/* <li>
           <Link to="/dashboard/user/orders">Orders</Link>
-        </li>
+        </li> */}
       </ul>
     </aside>
   )

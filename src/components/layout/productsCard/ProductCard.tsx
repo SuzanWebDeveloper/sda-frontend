@@ -2,7 +2,6 @@ import { Link } from "react-router-dom"
 import { toast } from "react-toastify"
 
 import { Product } from "@/types"
-import "./productCard.css"
 import { AppDispatch } from "@/toolkit/store"
 import { useDispatch } from "react-redux"
 import { addToCart } from "@/toolkit/slices/cartSlice"
@@ -35,7 +34,7 @@ const ProductCard = (props: { product: Product }) => {
           </p>
           <div>
             <button className="btn product__btn" onClick={() => handleAddToCart(product)}>
-              Add To Cart &nbsp;<i className="fa fa-shopping-cart" aria-hidden="true"></i>
+              <i className="fa fa-shopping-cart" aria-hidden="true"></i> &nbsp;Add to cart
             </button>
           </div>
         </div>

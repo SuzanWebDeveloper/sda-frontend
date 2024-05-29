@@ -9,9 +9,12 @@ const AdminSidebar = () => {
   return (
     <aside className="sidebar-container">
       <div>
-        <h3> Admin Dashboard</h3>
-        <p>{userData?.name}</p>
-        <p>{userData?.email}</p>
+        <h3>Dashboard</h3>
+      
+        <p>Admin: {userData?.name}</p>
+        <hr></hr>
+        <br />
+        {/* <p>{userData?.email}</p> */}
       </div>
       <ul>
         <li>

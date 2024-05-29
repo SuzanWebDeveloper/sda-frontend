@@ -15,6 +15,7 @@ export const UserProfile = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors }
   } = useForm<UpdateProfileFormData>()
 
@@ -26,8 +27,8 @@ export const UserProfile = () => {
       return
     }
     try {
-      const response = await dispatch(updateUser({ updateUserData: data, userId: userData.userId }))
-      console.log(response)
+       await dispatch(updateUser({ updateUserData: data, userId: userData.userId }))
+       reset()
     } catch (error) {
       console.log(error)
     }
@@ -39,7 +40,7 @@ export const UserProfile = () => {
       <div className="main-container">
         {userData && (
           <>
-            <h3> Name: {userData.name}</h3>
+            <h2> Name: {userData.name}</h2>
             <p> Email: {userData.email}</p>
             <p> Address: {userData.address}</p>
             <p> Phone: {userData.phone}</p>
@@ -49,12 +50,13 @@ export const UserProfile = () => {
                 setIsFormOpen(!isFormOpen)
               }}
             >
-              {isFormOpen ? "close Edit" : "Edit"}
+              {isFormOpen ? "Close edit" : "Edit"}
             </button>
 
             {isFormOpen && (
-              <form onSubmit={handleSubmit(onSubmit)}>
+              <form onSubmit={handleSubmit(onSubmit)} className="create-form">
                 <div className="form-field">
+                  <br/>
                   <label htmlFor="name">Name:</label>
                   <input
                     type="text"
@@ -72,7 +74,7 @@ export const UserProfile = () => {
                   {errors.phone && <p>{errors.phone.message}</p>}
                 </div> */}
 
-                <div>
+                <div className="form-field textarea">
                   <label htmlFor="address">Address:</label>
                   <textarea
                     id=""
@@ -85,6 +87,7 @@ export const UserProfile = () => {
                 <button className="btn" type="submit">
                   Save
                 </button>
+              
               </form>
             )}
           </>

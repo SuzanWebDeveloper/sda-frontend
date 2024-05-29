@@ -83,7 +83,7 @@ const AdminCategories = () => {
         {error && <p>Error{error}</p>}
 
         <div className="category-form-container">
-          <h3> {isEdit ? "Edit Category" : "Create category"}</h3>
+          <h3> {isEdit ? "Edit category" : "Create category"}</h3>
           <form onSubmit={handleSubmit(onSubmit)} className="create-form">
             <div className="form-field">
               <label htmlFor="name">Name</label>
@@ -106,14 +106,16 @@ const AdminCategories = () => {
               ></textarea>
               {errors.description && <p>{errors.description.message}</p>}
             </div>
-            <button className="btn" type="submit">
-              {isEdit ? "Edit Category" : "Create category"}
-            </button>
-            {isEdit && (
-              <button className="btn" onClick={handleCancel}>
-                Cancel
+            <div className="control-btn">
+              <button className="btn" type="submit">
+                {isEdit ? "Edit Category" : "Create category"}
               </button>
-            )}
+              {isEdit && (
+                <button className="btn" onClick={handleCancel}>
+                  Cancel
+                </button>
+              )}
+            </div>
           </form>
         </div>
 
@@ -136,16 +138,16 @@ const AdminCategories = () => {
                     <td className="category__details">{category.description}</td>
                     <td>
                       <button
-                        className="btn"
+                        className="edit-btn"
                         onClick={() => handleEdit(category.categoryId, category)}
                       >
-                        Edit
+                        <i className="fa-solid fa-pen-to-square"></i>
                       </button>
                       <button
-                        className="btn delete-btn"
+                        className="delete-btn"
                         onClick={() => handleDelete(category.categoryId)}
                       >
-                        Delete
+                        <i className="fas fa-trash-alt"></i>
                       </button>
                     </td>
                   </tr>

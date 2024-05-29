@@ -18,7 +18,7 @@ import {
 import { uploadImageToCloudinary } from "@/utils/cloudinary"
 
 const AdminProductsManagement = () => {
-  const { categories,isLoading:categoryIsLoading, error } = useCategoriesState()
+  const { categories, isLoading: categoryIsLoading, error } = useCategoriesState()
   const { products, isLoading } = useProductsState()
 
   const dispatch: AppDispatch = useDispatch()
@@ -27,8 +27,9 @@ const AdminProductsManagement = () => {
   const [searchTerm, setSearchTerm] = useState("")
   const [sortBy, setSortBy] = useState("Name")
   const [imagePreview, setImagePreview] = useState<string | null>(null)
-  // const [filteringTerm, setFilteringTerm] = useState<string[]>([])
   const [filteringTerm, setFilteringTerm] = useState("")
+
+  const [isEdit, setIsEdit] = useState(false)
 
   const {
     register,
@@ -40,7 +41,6 @@ const AdminProductsManagement = () => {
     formState: { errors }
   } = useForm<CreateProductFormData>()
 
-  const [isEdit, setIsEdit] = useState(false)
   const [selectedProductId, setSelectedProductId] = useState("")
   const [selectedCategoyId, setSelectedCategoryId] = useState("")
 
@@ -49,8 +49,6 @@ const AdminProductsManagement = () => {
     console.log("Selected category: ", watchedCategoryId)
     setSelectedCategoryId(watchedCategoryId)
   }, [watchedCategoryId])
-
-  console.log(selectedCategoyId)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -77,6 +75,7 @@ const AdminProductsManagement = () => {
   const handleEdit = async (product: Product) => {
     try {
       setIsEdit(true)
+      console.log(isEdit)
       setSelectedProductId(product.productId)
       setValue("name", product.name)
       setValue("description", product.description)
@@ -84,35 +83,19 @@ const AdminProductsManagement = () => {
       setValue("stock", product.stock) // quantity
       setImagePreview(product.image)
       setValue("categoryId", product.category.categoryId)
-      // setValue("categoryId", product.categoryId)
     } catch (error) {
       console.log(error)
     }
   }
 
-  // const onSubmit: SubmitHandler<CreateProductFormData> = async (data) => {
-  //   try {
-  //     let imageUrl = ""
-  //     if (data.image && data.image.length > 0) {
-  //       const file = data.image[0]
-  //       imageUrl = await uploadImageToCloudinary(file)
-  //     }
-  //     const productData = {
-  //       ...data,
-  //       image: imageUrl
-  //     }
-  //     console.log(data)
-  //     console.log(productData)
-  //     const response = await dispatch(createProduct(productData))
-  //   } catch (error) {
-  //     console.log("Product creation failed")
-  //     toast.error("Product creation failed")
-  //   }
-  // }
-
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
     if (file) setImagePreview(URL.createObjectURL(file))
+  }
+
+  const handleCancel = () => {
+    setIsEdit(false)
+    reset()
   }
 
   const onSubmit: SubmitHandler<CreateProductFormData> = async (data, productId) => {
@@ -144,10 +127,7 @@ const AdminProductsManagement = () => {
           ...data,
           image: imageUrl
         }
-        //console.log(data) // has category id
-        //console.log(productData) // has category id
         const response = await dispatch(createProduct(productData))
-        //console.log(response) // has category id
       }
       reset()
       setImagePreview(null)
@@ -172,7 +152,7 @@ const AdminProductsManagement = () => {
         {error && <p>Error{error}</p>}
 
         <div className="product-form-container">
-          <h3>Create Product</h3>
+          <h3> {isEdit ? "Edit product" : "Create product"}</h3>
           <form onSubmit={handleSubmit(onSubmit)} className="create-form">
             <div className="form-field">
               <label htmlFor="name">Name</label>
@@ -212,7 +192,6 @@ const AdminProductsManagement = () => {
                 {...register("stock", {
                   required: "Stock is required"
                 })}
-                // stock should be incremented automatically?
               />
               {errors.stock && <p>{errors.stock.message}</p>}
             </div>
@@ -245,9 +224,16 @@ const AdminProductsManagement = () => {
               />
               {imagePreview && <img src={imagePreview} alt="image preview" className="table-img" />}
             </div>
-            <button className="btn" type="submit">
-              {isEdit ? "Edit Product" : "Create Product"}
-            </button>
+            <div className="control-btn">
+              <button className="btn" type="submit">
+                {isEdit ? "Edit Product" : "Create Product"}
+              </button>
+              {isEdit && (
+                <button className="btn" onClick={handleCancel}>
+                  Cancel
+                </button>
+              )}
+            </div>
           </form>
         </div>
         {/* List Products start here */}
@@ -276,20 +262,20 @@ const AdminProductsManagement = () => {
                     </td>
                     <td>{product.name}</td>
                     <td>{getCategoryName(product.categoryId)}</td>
-                    {/* <td>{product.category.name}</td> */}
-                    <td>{product.description.substring(0, 100)}...</td>
+                    {/* <td>{product.description.substring(0, 100)}...</td> */}
+                    <td>{product.description}</td>
                     <td>{product.price}</td>
                     <td>{product.soldQuantity}</td>
                     <td>{product.stock}</td>
-                    <td>
-                      <button className="btn" onClick={() => handleEdit(product)}>
-                        Edit
+                    <td className="edit-delete-icon">
+                      <button className="edit-btn" onClick={() => handleEdit(product)}>
+                        <i className="fa-solid fa-pen-to-square"></i>
                       </button>
                       <button
-                        className="btn delete-btn"
+                        className="delete-btn"
                         onClick={() => handleDelete(product.productId)}
                       >
-                        Delete
+                        <i className="fas fa-trash-alt"></i>
                       </button>
                     </td>
                   </tr>

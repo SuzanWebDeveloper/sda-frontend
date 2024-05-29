@@ -12,7 +12,6 @@ import CartIcon from "@/components/CartIcon"
 import useCartState from "@/hook/useCartState"
 
 const Navbar = () => {
-  const [menu, setMenu] = useState("")
 
   const dispatch: AppDispatch = useDispatch()
 
@@ -34,30 +33,24 @@ const Navbar = () => {
         </div>
         <ul className="nav-menu">
           <li
-            onClick={() => {
-              setMenu("home")
-            }}
+          
           >
             <Link className="nav__link" to="/">
-              Home{menu === "home" ? <hr /> : <></>}
+              Home
             </Link>
           </li>
           <li
-            onClick={() => {
-              setMenu("products")
-            }}
+          
           >
-            <Link className="nav__link" to="/about">
-              Products{menu === "products" ? <hr /> : <></>}
+            <Link className="nav__link" to="/products">
+              Products
             </Link>
           </li>
           <li
-            onClick={() => {
-              setMenu("about")
-            }}
+           
           >
             <Link className="nav__link" to="/about">
-              About{menu === "about" ? <hr /> : <></>}
+              About
             </Link>
           </li>
         </ul>
@@ -66,16 +59,14 @@ const Navbar = () => {
             <>
               <ul>
                 <li
-                  onClick={() => {
-                    setMenu("account")
-                  }}
+                 
                 >
                   <Link
                     className="nav__link"
                     to={`/dashboard/${userData && userData.role == "admin" ? "admin" : "user"}`}
                   >
                     {userData && userData.role == "admin" ? "Admin Dashboard" : "My Account"}
-                    {menu === "account" ? <hr /> : <></>}
+                   
                   </Link>
                 </li>
               </ul>
@@ -91,12 +82,11 @@ const Navbar = () => {
               </Link>
             </>
           )}
-          {/*  */}
+      
           <Link to="/cart">
             <CartIcon value={cartItems && cartItems.length > 0 ? cartItems.length : 0} />
           </Link>
-          {/* <img src={cart_icon} className="nav-login-cart__icon" alt="cart-icon" />
-        <div className="nav-cart-count">0</div> */}
+      
         </div>
       </div>
     </nav>

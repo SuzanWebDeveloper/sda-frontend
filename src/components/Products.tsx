@@ -15,7 +15,6 @@ const Products = () => {
 
   const dispatch: AppDispatch = useDispatch()
 
-
   const [pageNumber, setPageNumber] = useState(1)
   const [pageSize] = useState(3)
   const [searchTerm, setSearchTerm] = useState("")
@@ -37,7 +36,6 @@ const Products = () => {
     fetchData()
   }, [])
 
-
   const handleNextPage = () => {
     setPageNumber((currentPage) => currentPage + 1)
   }
@@ -55,75 +53,85 @@ const Products = () => {
     setFilteringTerm(name)
   }
 
-
-
   return (
     <div>
       {isLoading && <p>Loading...</p>}
       {error && <p>Error{error}</p>}
 
-      <div className="filter-by-category ">
-        <button
-          onClick={() => setFilteringTerm("")}
-          className={`filter-by-category__btn ${filteringTerm ? "" : "active"}`}
-        >
-          All
-        </button>
-        {categories &&
-          categories.length > 0 &&
-          categories.map((category) => (
-            <div key={category.categoryId}>
+      {!isLoading && (
+        <>
+          <div className="filter-by-category ">
+            <button
+              onClick={() => setFilteringTerm("")}
+              className={`filter-by-category__btn ${filteringTerm ? "" : "active"}`}
+            >
+              All
+            </button>
+            {categories &&
+              categories.length > 0 &&
+              categories.map((category) => (
+                <div key={category.categoryId}>
+                  <button
+                    onClick={() => handleCategoryChange(category.name)}
+                    className={`filter-by-category__btn ${
+                      filteringTerm === category.name ? "active" : ""
+                    }`}
+                  >
+                    {category.name}
+                  </button>
+                </div>
+              ))}
+          </div>
+          <br />
+          {/* <h2>List of Products</h2> */}
+          <div className="action flex-space-between">
+            <div>
+              <input
+                type="text"
+                placeholder="Search Products"
+                value={searchTerm}
+                onChange={handleSearchChange}
+              />
+            </div>
+            <div className="flex-center">
+              <label htmlFor="sort">Sort By</label>
+              <select name="sort" id="sort" onChange={handleSortChange}>
+                <option value="Name">Name</option>
+                <option value="Price">Price</option>
+              </select>
+            </div>
+          </div>
+
+          <section className="products">
+            {products &&
+              products.length > 0 &&
+              products.map((product) => <ProductCard key={product.productId} product={product} />)}
+          </section>
+
+          {products && products.length > 0 && (
+            <div className="pagination">
               <button
-                onClick={() => handleCategoryChange(category.name)}
-                className={`filter-by-category__btn ${
-                  filteringTerm === category.name ? "active" : ""
-                }`}
+                onClick={handlePreviousPage}
+                disabled={pageNumber === 1}
+                className="page-arrow-btn"
               >
-                {category.name}
+                {"<"}
+              </button>
+              {Array.from({ length: totalPages }, (_, index) => (
+                <button key={index} onClick={() => setPageNumber(index + 1)} className="page-btn">
+                  {index + 1}
+                </button>
+              ))}
+              <button
+                onClick={handleNextPage}
+                disabled={pageNumber === totalPages}
+                className="page-arrow-btn"
+              >
+                {">"}
               </button>
             </div>
-          ))}
-      </div>
-      <br />
-      {/* <h2>List of Products</h2> */}
-      <div className="action flex-space-between">
-        <div>
-          <input
-            type="text"
-            placeholder="Search Products"
-            value={searchTerm}
-            onChange={handleSearchChange}
-          />
-        </div>
-        <div className="flex-center">
-          <label htmlFor="sort">Sort By</label>
-          <select name="sort" id="sort" onChange={handleSortChange}>
-            <option value="Name">Name</option>
-            <option value="Price">Price</option>
-          </select>
-        </div>
-      </div>
-
-      <section className="products">
-        {products &&
-          products.length > 0 &&
-          products.map((product) => <ProductCard key={product.productId} product={product} />)}
-      </section>
-
-      {products && products.length > 0 && (
-        <div className="pagination">
-          <button onClick={handlePreviousPage} disabled={pageNumber === 1}>
-            Previous
-          </button>
-          {Array.from({ length: totalPages }, (_, index) => (
-            <button key={index} onClick={() => setPageNumber(index + 1)} className="page-btn">
-              {index + 1}
-            </button>
-          ))}
-          <button onClick={handleNextPage} disabled={pageNumber === totalPages}>
-            Next
-          </button>
-        </div>
+          )}
+        </>
       )}
     </div>
   )
