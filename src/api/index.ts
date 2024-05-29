@@ -1,12 +1,14 @@
 import axios from "axios"
 
 const isDevelopment = import.meta.env.MODE === "development"
-let baseURL = "https://backend-ecommerce-sda-service.onrender.com/api"
+let baseURL = "https://backend-ecommerce-sda-service.onrender.com"
 
 if (!isDevelopment) {
   // Update this later when you have a working backend server
-  baseURL = "https://backend-ecommerce-sda-service.onrender.com/api"
+  baseURL = "https://backend-ecommerce-sda-service.onrender.com"
 }
+
+//https://backend-ecommerce-sda-service.onrender.com/api"
 
 const api = axios.create({
   baseURL
