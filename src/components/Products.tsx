@@ -58,8 +58,6 @@ const Products = () => {
       {isLoading && <p>Loading...</p>}
       {error && <p>Error{error}</p>}
 
-      {!isLoading && (
-        <>
           <div className="filter-by-category ">
             <button
               onClick={() => setFilteringTerm("")}
@@ -131,8 +129,6 @@ const Products = () => {
               </button>
             </div>
           )}
-        </>
-      )}
     </div>
   )
 }
