@@ -152,7 +152,7 @@ const AdminProductsManagement = () => {
         {error && <p>Error{error}</p>}
 
         <div className="product-form-container">
-          <h3> {isEdit ? "Edit product" : "Create product"}</h3>
+          <h3> {isEdit ? "Edit product" : "Add product"}</h3>
           <form onSubmit={handleSubmit(onSubmit)} className="create-form">
             <div className="form-field">
               <label htmlFor="name">Name</label>
@@ -226,7 +226,7 @@ const AdminProductsManagement = () => {
             </div>
             <div className="control-btn">
               <button className="btn" type="submit">
-                {isEdit ? "Edit Product" : "Create Product"}
+                {isEdit ? "Edit Product" : "Add Product"}
               </button>
               {isEdit && (
                 <button className="btn" onClick={handleCancel}>

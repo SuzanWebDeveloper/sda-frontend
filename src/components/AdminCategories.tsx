@@ -83,7 +83,7 @@ const AdminCategories = () => {
         {error && <p>Error{error}</p>}
 
         <div className="category-form-container">
-          <h3> {isEdit ? "Edit category" : "Create category"}</h3>
+          <h3> {isEdit ? "Edit category" : "Add category"}</h3>
           <form onSubmit={handleSubmit(onSubmit)} className="create-form">
             <div className="form-field">
               <label htmlFor="name">Name</label>
@@ -108,7 +108,7 @@ const AdminCategories = () => {
             </div>
             <div className="control-btn">
               <button className="btn" type="submit">
-                {isEdit ? "Edit Category" : "Create category"}
+                {isEdit ? "Edit Category" : "Add category"}
               </button>
               {isEdit && (
                 <button className="btn" onClick={handleCancel}>
