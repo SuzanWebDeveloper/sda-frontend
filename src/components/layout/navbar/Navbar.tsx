@@ -68,7 +68,7 @@ const Navbar = () => {
                 </Link>
               </div>
 
-              <DrawerNav  />
+              <DrawerNav />
             </div>
           </>
         ) : (
@@ -116,7 +116,7 @@ const Navbar = () => {
                 </>
               )}
 
-              <Link to="/cart">
+              <Link to="/cart" className="nav-login-cart__cart">
                 <CartIcon value={cartItems && cartItems.length > 0 ? cartItems.length : 0} />
               </Link>
             </div>

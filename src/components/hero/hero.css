@@ -40,13 +40,16 @@
   background-color: #e47681;
   border: none;
   color: white;
-  padding: 15px 32px;
+  padding: 13px 30px;
   margin-top: 1rem;
   text-decoration: none;
   /* display: inline-block; */
   font-size: 20px;
+    font-family: Poppins;
+
   /* border-radius: 3px; */
   transition: all 0.2s ease;
+  
 }
 
 button.button:active {

@@ -48,7 +48,11 @@ export const ProductDetails = () => {
                 currency: "USD"
               })}
             </p>
-            <p>Product Added: {new Date(product.createdAt).toLocaleDateString()}</p>
+            <p
+              className="product-details__date"
+            >
+              Product Added: {new Date(product.createdAt).toLocaleDateString()}
+            </p>
 
             <button className="btn product__btn" onClick={() => handleAddToCart(product)}>
               <i className="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;Add To Cart

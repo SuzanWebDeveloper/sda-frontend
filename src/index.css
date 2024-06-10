@@ -7,7 +7,8 @@
   --box-shadow: 0.1rem 0.1rem 0.3rem rgb(185, 185, 185, 0.3);
   padding: 0;
   text-align: center;
-  font-family: Myriad Pro;
+  font-family: Poppins;
+  /* font-family: Myriad Pro; */
   /* font-family: Poppins, Georgia, Times, "Times New Roman", serif; */
 }
 * {
@@ -31,10 +32,10 @@ img {
   height: auto;
 }
 
-p {
+/* p {
   padding-bottom: 0.4rem;
   font-family: Poppins;
-}
+} */
 
 h2 {
   margin-bottom: 0.5rem;
@@ -48,7 +49,8 @@ h2 {
   transition: var(--transition);
   background-color: var(--secondary-color);
   color: white;
-  font-size: medium;
+  font-size: 16px;
+  font-family: Poppins;
 }
 .btn:hover {
   background-color: black;
@@ -76,7 +78,7 @@ h2 {
 }
 .filter-by-category__btn {
   border: none;
-  padding: 0.5rem;
+  padding: 0.4rem;
   cursor: pointer;
   /* text-transform: uppercase; */
   transition: var(--transition);
@@ -84,6 +86,8 @@ h2 {
   color: white;
   min-width: 80px;
   font-size: 15px;
+  font-family: Poppins;
+  letter-spacing: 0.5px;
 }
 
 .section-title {
@@ -202,12 +206,19 @@ main {
   gap: 0.5rem;
 }
 
-.show-details-btn {
+h4{
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* .show-details-btn {
   background-color: rgb(113, 175, 113);
   color: white;
-}
+} */
 .product__btn {
-  margin-right: 0.5rem;
+  padding-right: 0.67rem;
+  padding-left: 0.6rem;
+
   margin-bottom: 0.2rem;
   background-color: var(--secondary-color);
   color: white;
@@ -220,9 +231,11 @@ main {
 
 /* product details starts here */
 .details h2 {
-  margin-bottom: 30px;
-  margin-top: 30px;
+  margin-bottom: 40px;
+  margin-top: 20px;
   height: 10px;
+  font-size: 25px;
+  font-weight: 500;
 }
 
 .details {
@@ -264,7 +277,10 @@ font-weight: 600px; */
   min-height: 100px;
 }
 .product-details__price {
-  font-weight: bold;
+  font-weight: 600;
+}
+.product-details__date {
+  font-size: 13px;
 }
 /* product details ends here */
 
@@ -370,6 +386,7 @@ select {
 .login-register-fields button {
   height: 40px;
   margin-bottom: 1rem;
+  font-family: Poppins;
 }
 .login-register__register {
   margin-top: 8px;
@@ -551,7 +568,7 @@ table tr:hover td {
 
 /* footer starts here */
 .footer {
-  padding: 25px 16px 16px 16px;
+  padding: 23px 16px 16px 16px;
   /* height: 25vh; */
   background-color: rgb(126, 123, 129);
   color: white;
@@ -563,7 +580,7 @@ table tr:hover td {
 .footer-top {
   display: flex;
   justify-content: space-around;
-  padding-bottom: 1rem;
+  padding-bottom: 1.3rem;
 }
 .footer-content {
   min-width: 30%;
@@ -589,6 +606,17 @@ table tr:hover td {
   border-top: 1px solid rgb(103, 102, 102);
   border-bottom: 1px solid rgba(215, 215, 215, 0.654);
 }
+
+.footer h2 {
+  font-size: 21px;
+  font-weight: 600;
+}
+
+.footer p {
+  font-size: 16px;
+  font-weight: 400;
+}
+
 /* footer ends here */
 
 .page-arrow-btn {
@@ -620,6 +648,14 @@ table tr:hover td {
 
 .custom-link:hover {
   color: pink;
+}
+
+.about-title {
+  /* margin-bottom: 40px;
+  margin-top: 20px;
+  height: 10px; */
+  font-size: 25px;
+  font-weight: 500;
 }
 
 /* responsiveness starts here */

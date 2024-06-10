@@ -92,7 +92,7 @@ const DrawerNav = () => {
         sx={{ color: "white", marginLeft: "auto" }}
         onClick={() => setOpenDrawer(!openDrawer)}
       >
-        <MenuIcon />
+        <MenuIcon sx={{ fontSize: 27 }} />
       </IconButton>
     </div>
   )
