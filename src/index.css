@@ -614,6 +614,14 @@ table tr:hover td {
   font-family: Poppins;
 }
 
+.custom-link {
+  text-decoration: none;
+}
+
+.custom-link:hover {
+  color: pink;
+}
+
 /* responsiveness starts here */
 @media (max-width: 1080px) {
   .products {

@@ -1,7 +1,6 @@
 .hero {
   /* height: 80vh; */
   min-height: 500px;
-  /* background-image: url(../assets/hero1.png); */
   background-image: url(../assets/hero.jpg);
   background-size: cover;
   background-image: center;
@@ -75,14 +74,12 @@ button.button:hover {
   .hero {
     /* height: 80vh; */
     min-height: 300px;
-    background-image: url("../../images/hero1.jpg");
     background-size: cover;
     background-image: center;
     padding-left: 4rem;
     padding-right: 0.5rem;
     background-color: pink;
   }
-  
 }
 @media screen and (max-width: 600px) {
   .hero__title {
@@ -97,7 +94,6 @@ button.button:hover {
   .hero {
     /* height: 80vh; */
     height: 400px;
-    background-image: url("../../images/hero1.jpg");
     background-size: cover;
     background-image: center;
     padding-left: 0.5rem;
@@ -105,12 +101,11 @@ button.button:hover {
     background-color: pink;
   }
   .hero-container {
-  display: flex;
-  /* align-content: center; */
-  flex-direction: column;
-  margin: 0 3.2rem;
-  justify-content: flex-start;
-  padding-top: 2.5rem;
- 
-}
+    display: flex;
+    /* align-content: center; */
+    flex-direction: column;
+    margin: 0 3.2rem;
+    justify-content: flex-start;
+    padding-top: 2.5rem;
+  }
 }
