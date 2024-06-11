@@ -58,77 +58,82 @@ const Products = () => {
       {isLoading && <p>Loading...</p>}
       {error && <p>Error{error}</p>}
 
-          <div className="filter-by-category ">
+      <div className="filter-by-category ">
+        <button
+          onClick={() => setFilteringTerm("")}
+          className={`filter-by-category__btn ${filteringTerm ? "" : "active"}`}
+        >
+          All
+        </button>
+        {categories &&
+          categories.length > 0 &&
+          categories.map((category) => (
+            <div key={category.categoryId}>
+              <button
+                onClick={() => handleCategoryChange(category.name)}
+                className={`filter-by-category__btn ${
+                  filteringTerm === category.name ? "active" : ""
+                }`}
+              >
+                {category.name}
+              </button>
+            </div>
+          ))}
+      </div>
+      <br />
+      {/* <h2>List of Products</h2> */}
+      <div className="action flex-space-between">
+        <div>
+          <input
+            type="text"
+            placeholder="Search Products"
+            value={searchTerm}
+            onChange={handleSearchChange}
+          />
+        </div>
+        <div className="flex-center">
+          <label htmlFor="sort">Sort By</label>
+          <select name="sort" id="sort" onChange={handleSortChange}>
+            <option value="Name">Name</option>
+            <option value="Price">Price</option>
+          </select>
+        </div>
+      </div>
+
+      <section className="products">
+        {products &&
+          products.length > 0 &&
+          products.map((product) => <ProductCard key={product.productId} product={product} />)}
+      </section>
+
+      {/* pagination */}
+      {products && products.length > 0 && (
+        <div className="pagination">
+          <button
+            onClick={handlePreviousPage}
+            disabled={pageNumber === 1}
+            className="page-arrow-btn"
+          >
+            {"<"}
+          </button>
+          {Array.from({ length: totalPages }, (_, index) => (
             <button
-              onClick={() => setFilteringTerm("")}
-              className={`filter-by-category__btn ${filteringTerm ? "" : "active"}`}
+              key={index}
+              onClick={() => setPageNumber(index + 1)}
+              className={index + 1 == pageNumber ? "active-btn" : ""}
             >
-              All
+              {index + 1}
             </button>
-            {categories &&
-              categories.length > 0 &&
-              categories.map((category) => (
-                <div key={category.categoryId}>
-                  <button
-                    onClick={() => handleCategoryChange(category.name)}
-                    className={`filter-by-category__btn ${
-                      filteringTerm === category.name ? "active" : ""
-                    }`}
-                  >
-                    {category.name}
-                  </button>
-                </div>
-              ))}
-          </div>
-          <br />
-          {/* <h2>List of Products</h2> */}
-          <div className="action flex-space-between">
-            <div>
-              <input
-                type="text"
-                placeholder="Search Products"
-                value={searchTerm}
-                onChange={handleSearchChange}
-              />
-            </div>
-            <div className="flex-center">
-              <label htmlFor="sort">Sort By</label>
-              <select name="sort" id="sort" onChange={handleSortChange}>
-                <option value="Name">Name</option>
-                <option value="Price">Price</option>
-              </select>
-            </div>
-          </div>
-
-          <section className="products">
-            {products &&
-              products.length > 0 &&
-              products.map((product) => <ProductCard key={product.productId} product={product} />)}
-          </section>
-
-          {products && products.length > 0 && (
-            <div className="pagination">
-              <button
-                onClick={handlePreviousPage}
-                disabled={pageNumber === 1}
-                className="page-arrow-btn"
-              >
-                {"<"}
-              </button>
-              {Array.from({ length: totalPages }, (_, index) => (
-                <button key={index} onClick={() => setPageNumber(index + 1)} className="page-btn">
-                  {index + 1}
-                </button>
-              ))}
-              <button
-                onClick={handleNextPage}
-                disabled={pageNumber === totalPages}
-                className="page-arrow-btn"
-              >
-                {">"}
-              </button>
-            </div>
-          )}
+          ))}
+          <button
+            onClick={handleNextPage}
+            disabled={pageNumber === totalPages}
+            className="page-arrow-btn"
+          >
+            {">"}
+          </button>
+        </div>
+      )}
     </div>
   )
 }
