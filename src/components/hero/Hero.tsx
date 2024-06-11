@@ -9,17 +9,16 @@ const Hero = () => {
     <div>
       <section className="hero">
         <div className="hero-container">
-          <p className="hero__title">Radiant Beauty Unlocked with Pink Roses</p>
-          <p className="hero__subtitle">
-            Explore our high quality skin, body and hair care rose products!
-            <br />
-            <Link to="products">
-              <button className="button" role="button">
-                Shop Now
-              </button>
-            </Link>
-          </p>
-
+            <p className="hero__title">Radiant Beauty Unlocked with Pink Roses</p>
+            <p className="hero__subtitle">
+              Explore our high quality skin, body and hair care rose products!
+              <br />
+              <Link to="products">
+                <button className="button" role="button">
+                  Shop Now
+                </button>
+              </Link>
+            </p>
           <div>
             {/* <button className="button" role="button">
               Shop Now
