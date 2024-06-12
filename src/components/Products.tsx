@@ -91,7 +91,7 @@ const Products = () => {
             onChange={handleSearchChange}
           />
         </div>
-        <div className="flex-center">
+        <div className="sort flex-center">
           <label htmlFor="sort">Sort By</label>
           <select name="sort" id="sort" onChange={handleSortChange}>
             <option value="Name">Name</option>

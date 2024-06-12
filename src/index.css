@@ -336,7 +336,7 @@ tr:nth-of-type(even) {
   margin-bottom: 3rem;
 }
 .login-register-container {
-  width: 450px;
+  max-width: 450px;
   min-height: 400px;
   background: #f8e7e8;
   margin: auto;
@@ -720,5 +720,32 @@ table tr:hover td {
   }
 }
 @media (max-width: 600px) {
+  .main-content-text {
+    padding-top: 10px;
+    max-width: 320px;
+    margin: 30px;
+    text-align: left;
+  }
+  .action {
+    display: flex;
+    flex-direction: column;
+  }
+  .sort {
+    gap: 0.2rem;
+    padding: 1.2rem 0 0;
+  }
+
+  .filter-by-category {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    flex-flow: nowrap;
+    margin-bottom: 1rem;
+  }
+  .filter-by-category__btn {
+    padding: 0.4rem;
+    min-width: 70px;
+  }
 }
 /* responsiveness ends here */
