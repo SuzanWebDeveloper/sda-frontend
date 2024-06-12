@@ -650,6 +650,14 @@ table tr:hover td {
   color: pink;
 }
 
+.mini-drawer-custom-link {
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.mini-drawer-custom-link:hover {
+  background-color: pink;
+}
+
 .about-title {
   /* margin-bottom: 40px;
   margin-top: 20px;
@@ -746,6 +754,9 @@ table tr:hover td {
   .filter-by-category__btn {
     padding: 0.4rem;
     min-width: 70px;
+  }
+  .xs {
+    padding-left: 12px;
   }
 }
 /* responsiveness ends here */

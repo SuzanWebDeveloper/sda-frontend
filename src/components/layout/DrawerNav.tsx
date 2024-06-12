@@ -65,7 +65,9 @@ const DrawerNav = () => {
             <Link to="/" className="custom-link">
               <ListItemButton onClick={() => setOpenDrawer(false)}>
                 <ListItemIcon>
-                  <ListItemText sx={{ pl: "1rem" }}>Home</ListItemText>
+                  <ListItemText sx={{ pl: "1rem" }}>
+                    Home
+                  </ListItemText>
                 </ListItemIcon>
               </ListItemButton>
             </Link>
