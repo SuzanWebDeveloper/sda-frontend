@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 
 import api from "@/api"
 import { OrderState } from "@/types"
+import { getToken } from "@/utils/localStorage"
 
 
 const initialState: OrderState = {
@@ -16,6 +17,17 @@ export const fetchOrders = createAsyncThunk("orders/fetchOrders", async () => {
   return response.data
 })
 
+//----------
+export const fetchUserOrders = createAsyncThunk("orders/fetchUserOrders", async () => {
+  const response = await api.get("/orders/userOrders",{
+   headers: {
+        Authorization: `Bearer ${getToken()}`
+      }  
+  })
+  return response.data
+})
+//-----------
+
 const orderSlice = createSlice({
   name: "orders",
   initialState: initialState,
@@ -26,6 +38,14 @@ const orderSlice = createSlice({
       state.orders = action.payload.data.items.$values
       state.isLoading = false
     })
+
+//---------
+ builder.addCase(fetchUserOrders.fulfilled, (state, action) => {
+   console.log(action.payload)
+  //  state.orders = action.payload.data.items.$values //??
+   state.isLoading = false
+ })
+//-----------
 
     builder.addMatcher(
       (action) => action.type.endsWith("/pending"),
@@ -44,5 +64,6 @@ const orderSlice = createSlice({
     )
   }
 })
+
 
 export default orderSlice.reducer

@@ -35,7 +35,10 @@ const Navbar = () => {
     <nav className="navbar">
       <div
         className={
-          open && (pathname == "/dashboard/user" || pathname == "/dashboard/user/profile")
+          open &&
+          (pathname == "/dashboard/user" ||
+            pathname == "/dashboard/user/profile" ||
+            pathname == "/dashboard/user/orders")
             ? "navbar-container-dashboard"
             : "navbar-container"
         }

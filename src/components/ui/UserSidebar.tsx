@@ -88,9 +88,9 @@ const UserSidebar = () => {
             </IconButton>
           </DrawerHeader>
 
-          <Divider />
+          {/* <Divider /> */}
 
-          <List>
+          <List sx={{ mt: "22px" }}>
             <Link to="/dashboard/user" className="mini-drawer-custom-link">
               <ListItem disablePadding sx={{ display: "block" }}>
                 <ListItemButton
@@ -137,33 +137,33 @@ const UserSidebar = () => {
               </ListItem>
             </Link>
 
-            {/* <ListItem
-            disablePadding
-            sx={{ display: "block" }}
-            onClick={() => {
-              navigate("/dashboard/user/orders")
-            }}
-          >
-            <ListItemButton
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? "initial" : "center",
-                px: 2.5
+            <ListItem
+              disablePadding
+              sx={{ display: "block" }}
+              onClick={() => {
+                navigate("/dashboard/user/orders")
               }}
             >
-              <ListItemIcon
+              <ListItemButton
                 sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : "auto",
-                  justifyContent: "center",
-                  ml: "3px"
+                  minHeight: 48,
+                  justifyContent: open ? "initial" : "center",
+                  px: 2.5
                 }}
               >
-                <i className="fa-solid fa-box fa-lg"></i>
-              </ListItemIcon>
-              <ListItemText primary="Orders" sx={{ opacity: open ? 1 : 0 }} />
-            </ListItemButton>
-          </ListItem> */}
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : "auto",
+                    justifyContent: "center",
+                    ml: "3px"
+                  }}
+                >
+                  <i className="fa-solid fa-box fa-lg"></i>
+                </ListItemIcon>
+                <ListItemText primary="Orders" sx={{ opacity: open ? 1 : 0 }} />
+              </ListItemButton>
+            </ListItem>
           </List>
         </Drawer>
       </Box>
