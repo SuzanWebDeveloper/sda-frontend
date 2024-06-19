@@ -124,3 +124,7 @@ export type OrderState = {
   error: null | string
   isLoading: boolean
 }
+
+export type MiniDrawerState = {
+  open: boolean
+}

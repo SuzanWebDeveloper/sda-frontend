@@ -254,8 +254,8 @@ h4 {
 }
 
 .product-details__left img {
-  height: 20rem;
-  width: 20rem;
+  height: 25rem;
+  width: 25rem;
 }
 
 .product-details__right {
@@ -264,7 +264,8 @@ h4 {
   flex-direction: column;
   gap: 0.3rem;
   align-items: flex-start;
-  margin: 0px 70px;
+  margin: 0px 100px 0px 30px;
+  padding-right: 100px;
   text-align: left;
 }
 .product-details__name {

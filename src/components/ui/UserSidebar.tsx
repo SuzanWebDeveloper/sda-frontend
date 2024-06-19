@@ -1,5 +1,5 @@
 import * as React from "react"
-import { styled, useTheme, Theme, CSSObject } from "@mui/material/styles"
+import { styled, useTheme, Theme, CSSObject, makeStyles } from "@mui/material/styles"
 import Box from "@mui/material/Box"
 import MuiDrawer from "@mui/material/Drawer"
 import List from "@mui/material/List"
@@ -16,8 +16,11 @@ import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
 import DashboardIcon from "@mui/icons-material/Dashboard"
 import PersonIcon from "@mui/icons-material/Person"
+import { useDispatch, useSelector } from "react-redux"
+import { AppDispatch, RootState } from "@/toolkit/store"
+import { toggleOpen } from "@/toolkit/slices/miniDrawerSlice"
 
-const drawerWidth = 240
+const drawerWidth = 185
 
 const openedMixin = (theme: Theme): CSSObject => ({
   width: drawerWidth,
@@ -68,69 +71,73 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== "open" 
 
 const UserSidebar = () => {
   const theme = useTheme()
-  const [open, setOpen] = React.useState(false)
   const navigate = useNavigate()
 
+  const dispatch: AppDispatch = useDispatch()
+
+  const { open } = useSelector((state: RootState) => state.miniDrawerR)
+
   return (
-    <Box sx={{ display: "flex" }}>
-      <CssBaseline />
-      <Drawer variant="permanent" open={open}>
-        <DrawerHeader>
-          <IconButton onClick={() => setOpen(!open)}>
-            {theme.direction === "rtl" ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-          </IconButton>
-        </DrawerHeader>
+    <>
+      <Box sx={{ display: "flex" }}>
+        <CssBaseline />
+        <Drawer variant="permanent" open={open}>
+          <DrawerHeader>
+            <IconButton onClick={() => dispatch(toggleOpen())}>
+              {theme.direction === "rtl" ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+            </IconButton>
+          </DrawerHeader>
 
-        <Divider sx={{ mt: "12px" }} />
+          <Divider />
 
-        <List>
-          <Link to="/dashboard/user" className="mini-drawer-custom-link">
-            <ListItem disablePadding sx={{ display: "block" }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5
-                }}
-              >
-                <ListItemIcon
+          <List>
+            <Link to="/dashboard/user" className="mini-drawer-custom-link">
+              <ListItem disablePadding sx={{ display: "block" }}>
+                <ListItemButton
                   sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center"
+                    minHeight: 48,
+                    justifyContent: open ? "initial" : "center",
+                    px: 2.5
                   }}
                 >
-                  <DashboardIcon />
-                </ListItemIcon>
-                <ListItemText primary="Dashboard" sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
-          </Link>
+                  <ListItemIcon
+                    sx={{
+                      minWidth: 0,
+                      mr: open ? 3 : "auto",
+                      justifyContent: "center"
+                    }}
+                  >
+                    <DashboardIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Dashboard" sx={{ opacity: open ? 1 : 0 }} />
+                </ListItemButton>
+              </ListItem>
+            </Link>
 
-          <Link to="/dashboard/user/profile" className="mini-drawer-custom-link">
-            <ListItem disablePadding sx={{ display: "block" }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5
-                }}
-              >
-                <ListItemIcon
+            <Link to="/dashboard/user/profile" className="mini-drawer-custom-link">
+              <ListItem disablePadding sx={{ display: "block" }}>
+                <ListItemButton
                   sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center"
+                    minHeight: 48,
+                    justifyContent: open ? "initial" : "center",
+                    px: 2.5
                   }}
                 >
-                  <PersonIcon />
-                </ListItemIcon>
-                <ListItemText primary="Profile" sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
-          </Link>
+                  <ListItemIcon
+                    sx={{
+                      minWidth: 0,
+                      mr: open ? 3 : "auto",
+                      justifyContent: "center"
+                    }}
+                  >
+                    <PersonIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Profile" sx={{ opacity: open ? 1 : 0 }} />
+                </ListItemButton>
+              </ListItem>
+            </Link>
 
-          {/* <ListItem
+            {/* <ListItem
             disablePadding
             sx={{ display: "block" }}
             onClick={() => {
@@ -157,9 +164,10 @@ const UserSidebar = () => {
               <ListItemText primary="Orders" sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
           </ListItem> */}
-        </List>
-      </Drawer>
-    </Box>
+          </List>
+        </Drawer>
+      </Box>
+    </>
   )
 }
 export default UserSidebar
