@@ -4,8 +4,7 @@ export const AdminDashboard = () => {
   return (
     <div className="admin-container">
       <AdminSidebar />
-      <div className="main-container">
-      </div>
+      <div className="main-container"></div>
     </div>
   )
 }

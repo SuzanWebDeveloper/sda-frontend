@@ -38,7 +38,12 @@ const Navbar = () => {
           open &&
           (pathname == "/dashboard/user" ||
             pathname == "/dashboard/user/profile" ||
-            pathname == "/dashboard/user/orders")
+            pathname == "/dashboard/user/orders" ||
+            pathname == "/dashboard/admin" ||
+            pathname == "/dashboard/admin/categories" ||
+            pathname == "/dashboard/admin/products" ||
+            pathname == "/dashboard/admin/users" ||
+            pathname == "/dashboard/admin/orders")
             ? "navbar-container-dashboard"
             : "navbar-container"
         }

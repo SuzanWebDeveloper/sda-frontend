@@ -57,8 +57,8 @@ const AdminUserManagement = () => {
                     <td>{user.email}</td>
                     <td>{user.role}</td>
                     <td>
-                      <button className="btn delete-btn" onClick={() => handleDelete(user.userId)}>
-                        Delete
+                      <button className="delete-btn" onClick={() => handleDelete(user.userId)}>
+                        <i className="fas fa-trash-alt"></i>
                       </button>
                     </td>
                   </tr>

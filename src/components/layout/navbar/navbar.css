@@ -9,7 +9,7 @@
   padding: 13px 0;
   background-color: #e48893;
   margin: 0 5.6rem;
-    /* margin: 0 5.6rem 0 16rem; */
+  /* margin: 0 5.6rem 0 16rem; */
 }
 
 .navbar-container-dashboard {
@@ -20,15 +20,15 @@
   margin: 0 1.5rem 0 12rem;
 }
 
-.miniDrawer-open{
-   display: flex;
+.miniDrawer-open {
+  display: flex;
   /* justify-content: space-around; */
   justify-content: space-between;
   /* padding: 0 100px; */
   padding: 16px 0;
   background-color: #e48893;
   margin: 0 1.5rem 0 12rem;
-   /* margin-left: 10rem; */
+  /* margin-left: 10rem; */
 }
 
 .nav-logo {
@@ -51,6 +51,7 @@
   justify-content: center;
   gap: 3px;
   cursor: pointer;
+  font-family: Poppins;
 }
 
 .nav-menu hr {
@@ -130,6 +131,7 @@
 
 .nav__link {
   color: white;
+  font-family: Poppins;
 }
 
 @media screen and (max-width: 600px) {
