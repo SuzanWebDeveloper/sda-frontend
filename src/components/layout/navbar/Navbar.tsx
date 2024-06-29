@@ -14,7 +14,6 @@ import DrawerNav from "../DrawerNav"
 const Navbar = () => {
   const location = useLocation()
   const { pathname } = location
-  console.log(pathname)
 
   const theme = useTheme()
   const isMatch = useMediaQuery(theme.breakpoints.down("md"))
@@ -29,7 +28,6 @@ const Navbar = () => {
   }
 
   const { open } = useSelector((state: RootState) => state.miniDrawerR)
-  console.log(open)
 
   return (
     <nav className="navbar">

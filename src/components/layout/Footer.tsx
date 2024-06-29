@@ -1,6 +1,29 @@
+import { RootState } from "@/toolkit/store"
+import { useSelector } from "react-redux"
+import { useLocation } from "react-router-dom"
+
 const Footer = () => {
+  const location = useLocation()
+  const { pathname } = location
+  const { open } = useSelector((state: RootState) => state.miniDrawerR)
+
   return (
-    <footer className="footer">
+    // <footer className="footer">
+    <footer
+      className={
+        open &&
+        (pathname == "/dashboard/user" ||
+          pathname == "/dashboard/user/profile" ||
+          pathname == "/dashboard/user/orders" ||
+          pathname == "/dashboard/admin" ||
+          pathname == "/dashboard/admin/categories" ||
+          pathname == "/dashboard/admin/products" ||
+          pathname == "/dashboard/admin/users" ||
+          pathname == "/dashboard/admin/orders")
+          ? "footer-dashboard"
+          : "footer"
+      }
+    >
       <div id="footer-top" className="footer-top">
         <div id="footer-quick-links" className="footer-content">
           <h2>Shipping</h2>

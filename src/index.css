@@ -618,6 +618,20 @@ table tr:hover td {
   font-weight: 400;
 }
 
+.footer-dashboard {
+  margin-left: 170px;
+   padding: 23px 16px 16px 16px;
+  /* height: 25vh; */
+  background-color: rgb(126, 123, 129);
+  color: white;
+  font-size: 16px;
+}
+
+.footer-dashboard h2 {
+  font-size: 21px;
+  font-weight: 600;
+}
+
 /* footer ends here */
 
 .page-arrow-btn {

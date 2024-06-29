@@ -1,41 +1,3 @@
-// import { RootState } from "@/toolkit/store"
-// import { useSelector } from "react-redux"
-// import { Link } from "react-router-dom"
-
-// const AdminSidebar = () => {
-//   //get user data from the store
-//   const { userData } = useSelector((state: RootState) => state.userR)
-
-//   return (
-//     <aside className="sidebar-container">
-//       <div>
-//         <h3>Dashboard</h3>
-
-//         <p>Admin: {userData?.name}</p>
-//         <hr></hr>
-//         <br />
-//         {/* <p>{userData?.email}</p> */}
-//       </div>
-//       <ul>
-//         <li>
-//           <Link to="/dashboard/admin/categories">Categories</Link>
-//         </li>
-//         <li>
-//           <Link to="/dashboard/admin/products">Products</Link>
-//         </li>
-//         <li>
-//           <Link to="/dashboard/admin/users">Users</Link>
-//         </li>
-//         <li>
-//           <Link to="/dashboard/admin/orders">Orders</Link>
-//         </li>
-//       </ul>
-//     </aside>
-//   )
-// }
-
-// export default AdminSidebar
-
 import { styled, useTheme, Theme, CSSObject } from "@mui/material/styles"
 import Box from "@mui/material/Box"
 import MuiDrawer from "@mui/material/Drawer"
@@ -233,13 +195,13 @@ const AdminSidebar = () => {
                   sx={{
                     minHeight: 48,
                     justifyContent: open ? "initial" : "center",
-                    px: 2.5
+                    px: 2.4
                   }}
                 >
                   <ListItemIcon
                     sx={{
                       minWidth: 0,
-                      mr: open ? 3.2 : "auto",
+                      mr: open ? 3.3 : "auto",
                       justifyContent: "center",
                       ml: "3px"
                     }}

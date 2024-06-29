@@ -148,13 +148,13 @@ const UserSidebar = () => {
                 sx={{
                   minHeight: 48,
                   justifyContent: open ? "initial" : "center",
-                  px: 2.5
+                  px: 2.4
                 }}
               >
                 <ListItemIcon
                   sx={{
                     minWidth: 0,
-                    mr: open ? 3 : "auto",
+                    mr: open ? 3.2 : "auto",
                     justifyContent: "center",
                     ml: "3px"
                   }}
