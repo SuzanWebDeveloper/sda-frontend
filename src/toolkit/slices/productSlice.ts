@@ -47,6 +47,7 @@ export const fetchProducts = createAsyncThunk(
     //   `/products?pageNumber=${pageNumber}&pageSize=${pageSize}&searchTerm=${searchTerm}&sortBy=${sortBy}`
     // )
     const response = await api.get("/products", { params })
+    console.log(response.data)
     return response.data
   }
 )
@@ -111,7 +112,6 @@ export const createProduct = createAsyncThunk(
         Authorization: `Bearer ${getToken()}`
       }
     })
-    console.log(response.data)
     return response.data
   }
 )
@@ -160,7 +160,7 @@ const productSlice = createSlice({
     })
 
     builder.addCase(createProduct.fulfilled, (state, action) => {
-      console.log(action.payload.data.categoryId)
+      console.log(action.payload.data.price)
       state.products.push(action.payload.data)
       state.isLoading = false
     })
@@ -169,7 +169,7 @@ const productSlice = createSlice({
       const foundProduct = state.products.find(
         (product) => product.productId == action.payload.data.productId
       )
-       
+      
       if (foundProduct) {
         foundProduct.name = action.payload.data.name
         foundProduct.description = action.payload.data.description

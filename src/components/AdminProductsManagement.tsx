@@ -244,11 +244,12 @@ const AdminProductsManagement = () => {
               <tr>
                 <th>Image</th>
                 <th>Name</th>
-                <th>Categories</th>
+                <th>Category</th>
                 <th>Description</th>
                 <th>Price</th>
-                <th>soldQuantity</th>
+                <th>Sold</th>
                 <th>Quantity</th>
+                <th>Date Added</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -267,6 +268,7 @@ const AdminProductsManagement = () => {
                     <td>{product.price}</td>
                     <td>{product.soldQuantity}</td>
                     <td>{product.stock}</td>
+                    <td>{product.createdAt}</td>
                     <td className="edit-delete-icon">
                       <button className="edit-btn" onClick={() => handleEdit(product)}>
                         <i className="fa-solid fa-pen-to-square"></i>

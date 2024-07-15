@@ -27,7 +27,7 @@ const Footer = () => {
       <div id="footer-top" className="footer-top">
         <div id="footer-quick-links" className="footer-content">
           <h2>Shipping</h2>
-          <p>Available within USA only</p>
+          <p>Available within Saudi Arabia only</p>
           <p> It takes 2-7 business days for delivery</p>
         </div>
         <div id="footer-contact" className="footer-content" aria-label="contact">

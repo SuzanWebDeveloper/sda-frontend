@@ -632,6 +632,12 @@ table tr:hover td {
   font-weight: 600;
 }
 
+.footer-dashboard hr {
+  margin: 0 -200px;
+  border-top: 1px solid rgb(103, 102, 102);
+  border-bottom: 1px solid rgba(215, 215, 215, 0.654);
+}
+
 /* footer ends here */
 
 .page-arrow-btn {

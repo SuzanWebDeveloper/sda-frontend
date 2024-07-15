@@ -45,7 +45,7 @@ export const ProductDetails = () => {
               {" "}
               {product.price.toLocaleString("en-us", {
                 style: "currency",
-                currency: "USD"
+                currency: "SAR"
               })}
             </p>
             <p
